@@ -1,0 +1,83 @@
+﻿<Window x:Class="mechanicWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mechanicWPF"
+        WindowStyle="None"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="700" Width="1000">
+    <StackPanel Orientation="Vertical">
+        <Grid  VerticalAlignment="Top" MouseLeftButtonDown="Grid_MouseLeftButtonDown" >
+
+
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        
+            <Grid Grid.Column="0" Margin="5,5,0,0" >
+                <!--#region menuButtons-->
+                <StackPanel Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
+                    <Image Source="./Assets/logo.png" Width="30" Height="30" Margin="5"/>
+                    <GridSplitter Width="1"  Background="Black" Margin="0,4,0,4" />
+                    <Button Content="Categorias" Name="btnCategories" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="btnCategories_Click"/>
+                    <GridSplitter Width="1"  Background="Black" Margin="0,4,0,4" />
+                    <Button Content="Servicios" Name="btnServices" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="btnServices_Click"/>
+                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
+                    <Button Content="hola" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
+                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
+                    <Button Content="hola" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
+                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
+                    <Button Content="hola" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
+                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
+                    <Button Content="hola" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
+                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
+                </StackPanel>
+
+                <Rectangle Fill="Orange" Grid.Row="0" Panel.ZIndex="-1"/>
+                <!--#endregion-->
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="0,5,5,0">
+                <Rectangle Fill="Orange" Grid.Column="1" Panel.ZIndex="-1"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <!--#region winControls -->
+                    <Label x:Name="lblUserId" Visibility="Hidden"/>
+                    <Label Content="Juan Perez" Name="lblUserName" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    <Label Content="foto" BorderBrush="Black" Margin="0,0,10,0" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+                    
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,5,0" Height="40" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.RowSpan="2">
+
+                        <Button x:Name="btnClose" Style="{StaticResource IconButtonsStyle}" Content="{DynamicResource close}" Click="btnClose_Click" Tag="IsCloseButton"/>
+                        <Button x:Name="btnRestore" Margin="0,0" Click="btnRestore_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource IconButtonsStyle}">
+                                    <Setter Property="Content" Value="{DynamicResource maximize}"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ElementName=home, Path=WindowState}" Value="Maximized">
+                                            <Setter Property="Content" Value="{DynamicResource restore}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button x:Name="btnMinimize" Style="{DynamicResource IconButtonsStyle}" Content="{DynamicResource minimize}" Click="btnMinimize_Click"/>
+
+                    </StackPanel>
+                    <!--#endregion-->
+
+
+                </StackPanel>
+                
+            </Grid>
+        </Grid>
+
+        <Frame BorderBrush="OrangeRed" BorderThickness="1" x:Name="frame" Source="./Pages/PgWelcome.xaml" Margin="10" Height="635" NavigationUIVisibility="Hidden" />
+    </StackPanel>
+    
+
+</Window>
