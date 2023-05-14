@@ -37,42 +37,8 @@ namespace mechanicWPF.Pages
             Select();
         }
 
-        private void btnInsert_Click(object sender, RoutedEventArgs e)
-        {
-            if(txtCategory.Text == "")
-            {
-                MessageBox.Show("No se puede insertar un campo vacio");
-                return;
-            }
-            else
-            {
-                productCategory category = new productCategory(txtCategory.Text);
-                productCategoryImpl implCategory = new productCategoryImpl();
-                try
-                {
-                    int n = implCategory.Insert(category);
-                    if (n > 0)
-                    {
-                        MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
-                        Select();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now);
 
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-                txtCategory.Clear();
-
-            }
-
-        }
-
+        #region crud
         void Select()
         {
             
@@ -93,14 +59,6 @@ namespace mechanicWPF.Pages
 
 
         }
-
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-            Update();
-            Select();
-
-        }
-
         void Update()
         {
             DataRowView view = (DataRowView)dgvCategories.SelectedItem;
@@ -138,25 +96,6 @@ namespace mechanicWPF.Pages
             }
 
         }
-
-        private void dgvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataRowView view = (DataRowView)dgvCategories.SelectedItem;
-            if (view != null)
-            {
-                string changed = (view.Row.ItemArray[1].ToString());
-                txtCategory.Text = changed;
-            }
-
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            Delete();
-            Select();
-
-        }
-
         void Delete()
         {
             DataRowView view = (DataRowView)dgvCategories.SelectedItem;
@@ -185,5 +124,74 @@ namespace mechanicWPF.Pages
                 MessageBox.Show("Seleccione un registro para eliminarlo");
             }
         }
+        #endregion
+
+
+        private void btnInsert_Click(object sender, RoutedEventArgs e)
+        {
+            if(txtCategory.Text == "")
+            {
+                MessageBox.Show("No se puede insertar un campo vacio");
+                return;
+            }
+            else
+            {
+                productCategory category = new productCategory(txtCategory.Text);
+                productCategoryImpl implCategory = new productCategoryImpl();
+                try
+                {
+                    int n = implCategory.Insert(category);
+                    if (n > 0)
+                    {
+                        MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
+                        Select();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                txtCategory.Clear();
+
+            }
+
+        }
+
+        
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+            Select();
+
+        }
+
+       
+
+        private void dgvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataRowView view = (DataRowView)dgvCategories.SelectedItem;
+            if (view != null)
+            {
+                string changed = (view.Row.ItemArray[1].ToString());
+                txtCategory.Text = changed;
+            }
+
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Delete();
+            Select();
+
+        }
+
+        
     }
 }

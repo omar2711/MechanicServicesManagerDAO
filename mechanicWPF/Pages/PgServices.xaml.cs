@@ -38,6 +38,7 @@ namespace mechanicWPF.Pages
             Select();
         }
 
+        #region crud
         void Select()
         {
 
@@ -57,7 +58,90 @@ namespace mechanicWPF.Pages
             }
 
 
+        } 
+        void Update()
+        {
+            DataRowView view = (DataRowView)dgvServices.SelectedItem;
+            if (view != null)
+            {
+                if (txtServiceDescription.Text == "" || txtServiceName.Text == "" || txtServicePrice.Text == "")
+                {
+                    MessageBox.Show("No se puede insertar un campo vacio");
+                    return;
+
+                }
+                else
+                {
+                    try
+                    {
+                        int id = int.Parse(view.Row[0].ToString());
+                        service service = new service(txtServiceName.Text, txtServiceDescription.Text, double.Parse(txtServicePrice.Text), id);
+                        serviceImpl implCategory = new serviceImpl();
+
+                        int n = implCategory.Update(service);
+                        if (n > 0)
+                        {
+                            MessageBox.Show("Resgistro actualizado con exito - " + DateTime.Now);
+                            Select();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo actualizar el registro");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            
         }
+        void Delete()
+        {
+            DataRowView view = (DataRowView)dgvServices.SelectedItem;
+            if (view != null)
+            {
+                if (MessageBox.Show("Desea eliminar el registro", "Advertencia", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        int id = int.Parse(view.Row[0].ToString());
+                        service service = new service(id);
+                        serviceImpl implCategory = new serviceImpl();
+
+                        int n = implCategory.Delete(service);
+                        if (n > 0)
+                        {
+                            MessageBox.Show("Resgistro eliminado con exito - " + DateTime.Now);
+                            Select();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo eliminar el registro");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No se borro el servicio");
+                }
+            }                   
+            else
+            {
+                MessageBox.Show("Seleccione un registro");
+            }
+        }
+        #endregion
+        
 
         private void btnInsert_Click(object sender, RoutedEventArgs e)
         {
@@ -101,93 +185,10 @@ namespace mechanicWPF.Pages
             Select();
         }
 
-        void Update()
-        {
-            DataRowView view = (DataRowView)dgvServices.SelectedItem;
-            if (view != null)
-            {
-                if (txtServiceDescription.Text == "" || txtServiceName.Text == "" || txtServicePrice.Text == "")
-                {
-                    MessageBox.Show("No se puede insertar un campo vacio");
-                    return;
-
-                }
-                else
-                {
-                    try
-                    {
-                        int id = int.Parse(view.Row[0].ToString());
-                        service service = new service(txtServiceName.Text, txtServiceDescription.Text, double.Parse(txtServicePrice.Text), id);
-                        serviceImpl implCategory = new serviceImpl();
-
-                        int n = implCategory.Update(service);
-                        if (n > 0)
-                        {
-                            MessageBox.Show("Resgistro actualizado con exito - " + DateTime.Now);
-                            Select();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se pudo actualizar el registro");
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-            }
-            
-        }
-
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Delete();
             Select();
-        }
-
-        void Delete()
-        {
-            DataRowView view = (DataRowView)dgvServices.SelectedItem;
-            if (view != null)
-            {
-                if (MessageBox.Show("Desea eliminar el registro", "Advertencia", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    try
-                    {
-                        int id = int.Parse(view.Row[0].ToString());
-                        service service = new service(id);
-                        serviceImpl implCategory = new serviceImpl();
-
-                        int n = implCategory.Delete(service);
-                        if (n > 0)
-                        {
-                            MessageBox.Show("Resgistro eliminado con exito - " + DateTime.Now);
-                            Select();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se pudo eliminar el registro");
-                        }
-
-                    }
-                    catch (Exception ex)
-                    {
-
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No se borro el servicio");
-                }
-            }                   
-            else
-            {
-                MessageBox.Show("Seleccione un registro");
-            }
         }
 
         private void dgvServices_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -206,6 +207,7 @@ namespace mechanicWPF.Pages
             }
         }
 
+        #region data validation
         private void NumericOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             e.Handled = IsTextNumeric(e.Text);
@@ -216,5 +218,6 @@ namespace mechanicWPF.Pages
             System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("[^0-9]");
             return reg.IsMatch(str);
         }
+        #endregion
     }
 }
