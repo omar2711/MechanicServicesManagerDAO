@@ -79,7 +79,7 @@ namespace mechanicWPF.Pages
                 worker.Password = password;
                 worker.ProfilePic = 1;
                 worker.UserID = SessionClass.ID;
-                worker.RoleID = cmbRole.SelectedIndex;
+                worker.RoleID = int.Parse(cmbRole.SelectedValue.ToString());
 
                 while(workerImpl.CompareUserName(username)==true)
                 {
@@ -152,7 +152,16 @@ namespace mechanicWPF.Pages
 
         private void btnInsert_Click(object sender, RoutedEventArgs e)
         {
-            Insert();
+            try
+            {
+                Insert();
+                Select();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message+"\n"+cmbRole.SelectedValue);
+            }
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
