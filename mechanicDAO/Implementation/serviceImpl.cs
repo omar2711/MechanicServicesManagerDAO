@@ -18,7 +18,7 @@ namespace mechanicDAO.Implementation
         {
             string query = @"UPDATE service SET status = 0, modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
             SqlCommand command = CreateBasicCommand(query);
-            command.Parameters.AddWithValue("@userId", t.UserID);
+            command.Parameters.AddWithValue("@userId", SessionClass.ID);
             try
             {
                 command.Connection.Open();
@@ -37,11 +37,12 @@ namespace mechanicDAO.Implementation
 
         public int Insert(service t)
         {
-            string query = @"INSERT INTO service(serviceName, serviceDetail, servicePrice, userId) VALUES (@serviceName, @serviceDetail, @servicePrice, 1)";
+            string query = @"INSERT INTO service(name, detail, price, userId) VALUES (@serviceName, @serviceDetail, @servicePrice, @userId)";
             SqlCommand command = CreateBasicCommand(query);
             command.Parameters.AddWithValue("@serviceName", t.ServiceName);
             command.Parameters.AddWithValue("@servicePrice", t.ServicePrice);
             command.Parameters.AddWithValue("@serviceDetail", t.ServiceDetail);
+            command.Parameters.AddWithValue("@userId", SessionClass.ID);
             try
             {
                 command.Connection.Open();
@@ -60,7 +61,7 @@ namespace mechanicDAO.Implementation
 
         public DataTable Select()
         {
-            string query = @"SELECT id, serviceName AS Servicio, serviceDetail AS 'Descripcion del Servicio', servicePrice AS Precio, creationDate AS 'Fecha de Creacion' , modificationDate AS 'Fecha de Modificacion', userId AS 'Id del Empleado' FROM service WHERE status = 1";
+            string query = @"SELECT id, name AS Servicio, detail AS 'Descripcion del Servicio', price AS Precio, creationDate AS 'Fecha de Creacion' , modificationDate AS 'Fecha de Modificacion', userId AS 'Id del Empleado' FROM service WHERE status = 1";
             SqlCommand command = CreateBasicCommand(query);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -84,12 +85,12 @@ namespace mechanicDAO.Implementation
 
         public int Update(service t)
         {
-            string query = @"UPDATE service SET serviceName = @serviceName, serviceDetail = @serviceDetail, servicePrice = @servicePrice, modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
+            string query = @"UPDATE service SET name = @serviceName, detail = @serviceDetail, price = @servicePrice, modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
             SqlCommand command = CreateBasicCommand(query);
             command.Parameters.AddWithValue("@serviceName", t.ServiceName);
             command.Parameters.AddWithValue("@serviceDetail", t.ServiceDetail);
             command.Parameters.AddWithValue("@servicePrice", t.ServicePrice);
-            command.Parameters.AddWithValue("@userId", "1");
+            command.Parameters.AddWithValue("@userId", SessionClass.ID);
             try
             {
                 command.Connection.Open();

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace mechanicDAO.Implementation
 {
-    internal class roleImpl : BaseImpl, IRole
+    public class roleImpl : BaseImpl, IRole
     {
         public int Delete(role t)
         {
@@ -36,7 +36,7 @@ namespace mechanicDAO.Implementation
 
         public int Insert(role t)
         {
-            string query = @"INSERT INTO role(roleName, description ,userId) VALUES (@name, 1)";
+            string query = @"INSERT INTO role(name, description ,userId) VALUES (@name, 1)";
             SqlCommand command = CreateBasicCommand(query);
             command.Parameters.AddWithValue("@name", t.Name);
             try
@@ -57,7 +57,7 @@ namespace mechanicDAO.Implementation
 
         public DataTable Select()
         {
-            string query = @"SELECT id, roleName AS 'Nombre del Rol', description AS 'Descripcion del Rol',creationDate AS 'Fecha de Creacion' , modificationDate AS 'Fecha de Modificacion', userId AS 'Id del Empleado' FROM role WHERE status = 1";
+            string query = @"SELECT id, name AS 'Nombre del Rol', description AS 'Descripcion del Rol',creationDate AS 'Fecha de Creacion' , modificationDate AS 'Fecha de Modificacion', userId AS 'Id del Empleado' FROM role WHERE status = 1";
             SqlCommand command = CreateBasicCommand(query);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;
@@ -81,7 +81,7 @@ namespace mechanicDAO.Implementation
 
         public int Update(role t)
         {
-            string query = @"UPDATE role SET roleName = @name, description = @description ,modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
+            string query = @"UPDATE role SET name = @name, description = @description ,modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
             SqlCommand command = CreateBasicCommand(query);
             command.Parameters.AddWithValue("@name", t.Name);
             command.Parameters.AddWithValue("@description", t.Description);
@@ -104,5 +104,32 @@ namespace mechanicDAO.Implementation
 
 
         }
+
+        public DataTable SelectComboRole()
+        {
+            string query = @"SELECT TOP (1000) [id]
+                          ,[name]
+                          ,[description]
+                          ,[status]
+                          ,[creationDate]
+                          ,[modificationDate]
+                          ,[userId]
+                          FROM [dbMechanic].[dbo].[role]";
+
+            SqlCommand command = CreateBasicCommand(query);
+
+            try
+            {
+                return ExecuteDataTableCommand(command);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
     }
 }

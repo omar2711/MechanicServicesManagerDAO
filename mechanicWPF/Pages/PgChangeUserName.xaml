@@ -1,0 +1,22 @@
+﻿<Page x:Class="mechanicWPF.Pages.PgChangeUserName"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:mechanicWPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PgChangeUserName">
+
+    <Grid>
+        <StackPanel>
+            <Label Content="Introduce tu Nuevo Nombre de Usuario" Margin="20,25,0,0"/>
+            <TextBox x:Name="txtNewName" Style="{StaticResource TextBoxStyle}" Width="200" Height="30" HorizontalAlignment="Left" Margin="20,5,0,0" />
+            <Label Content="Introduce tu contraseña" Margin="20,0,0,0"/>
+            <TextBox x:Name="txtPass" Width="200" Style="{StaticResource TextBoxStyle}" Height="30" HorizontalAlignment="Left" Margin="20,0,0,0" />
+            
+            <Button x:Name="btnChangePass" Content="Cambiar Nombre de Usuario" Style="{StaticResource ButtonStyle}" Width="205" Height="30" HorizontalAlignment="Left" Margin="20,20,0,0" Click="btnChangePass_Click"/>
+        </StackPanel>
+        
+    </Grid>
+</Page>

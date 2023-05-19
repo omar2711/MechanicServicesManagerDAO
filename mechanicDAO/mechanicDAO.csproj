@@ -45,14 +45,19 @@
     <Compile Include="Implementation\productCategoryImpl.cs" />
     <Compile Include="Implementation\roleImpl.cs" />
     <Compile Include="Implementation\serviceImpl.cs" />
+    <Compile Include="Implementation\workerImpl.cs" />
     <Compile Include="Interfaces\IBase.cs" />
     <Compile Include="Interfaces\IproductCategory.cs" />
     <Compile Include="Interfaces\IRole.cs" />
     <Compile Include="Interfaces\IService.cs" />
+    <Compile Include="Interfaces\IWorker.cs" />
     <Compile Include="Model\BaseTable.cs" />
+    <Compile Include="Model\person.cs" />
     <Compile Include="Model\productCategory.cs" />
     <Compile Include="Model\role.cs" />
     <Compile Include="Model\service.cs" />
+    <Compile Include="Model\SessionClass.cs" />
+    <Compile Include="Model\worker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

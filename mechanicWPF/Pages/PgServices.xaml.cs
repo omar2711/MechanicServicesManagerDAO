@@ -36,6 +36,30 @@ namespace mechanicWPF.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Select();
+
+            if(SessionClass.SessionRole == "7")
+            {
+                btnInsert.Visibility= Visibility.Collapsed;
+                btnEdit.Visibility = Visibility.Collapsed;
+                btnDelete.Visibility = Visibility.Collapsed;
+                txtServiceDescription.Visibility= Visibility.Collapsed;
+                txtServiceName.Visibility = Visibility.Collapsed;
+                txtServicePrice.Visibility = Visibility.Collapsed;
+                lblDesc.Visibility= Visibility.Collapsed;
+                lblName.Visibility = Visibility.Collapsed;  
+                lblPrice.Visibility = Visibility.Collapsed;
+                
+
+            }
+            else
+            {
+                btnInsert.Visibility = Visibility.Visible;
+                btnEdit.Visibility = Visibility.Visible;
+                btnDelete.Visibility = Visibility.Visible;
+                txtServiceDescription.Visibility = Visibility.Visible;
+                txtServiceName.Visibility = Visibility.Visible;
+                txtServicePrice.Visibility = Visibility.Visible;
+            }
         }
 
         #region crud

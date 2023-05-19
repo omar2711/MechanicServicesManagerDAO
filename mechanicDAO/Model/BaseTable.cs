@@ -20,6 +20,18 @@ namespace mechanicDAO.Model
             ModificationDate = modificationDate;
             UserID = userID;
         }
+
+        public BaseTable(DateTime modificationDate, int userID)
+        {
+            ModificationDate = modificationDate;
+            UserID = userID;
+        }
+
+        public BaseTable( int userID)
+        {
+            
+            UserID = userID;
+        }
         public BaseTable()
         {
 

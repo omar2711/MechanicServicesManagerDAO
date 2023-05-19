@@ -63,6 +63,36 @@ namespace mechanicDAO.Implementation
 
         }
 
+        //create a nbasic commands implementation
+
+        public void ExecuteNBasicCommands(List<SqlCommand> commands)
+        {
+            SqlTransaction transaction = null;
+
+            try
+            {
+                commands[0].Connection.Open();
+                transaction = commands[0].Connection.BeginTransaction();
+
+                foreach(var item in commands)
+                {
+                    item.Transaction = transaction;
+                    item.ExecuteNonQuery();
+                }
+                transaction.Commit();
+
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw ex;
+            }
+            finally
+            {
+                commands[0].Connection.Close(); 
+            }
+        }
+
 
         public int ExecuteBasicCommand(SqlCommand command)
         {

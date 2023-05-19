@@ -34,7 +34,7 @@
                 <Button Content="Eliminar" x:Name="btnDelete" Margin="5" Style="{StaticResource ButtonStyle}" Click="btnDelete_Click" />
             </StackPanel>
 
-            <DataGrid x:Name="dgvCategories" Grid.Column="1" Style="{StaticResource MinimalisticDataGridStyle}" SelectionChanged="dgvCategories_SelectionChanged"/>
+            <DataGrid x:Name="dgvCategories" IsReadOnly="True" Grid.Column="1" Style="{StaticResource MinimalisticDataGridStyle}" SelectionChanged="dgvCategories_SelectionChanged"/>
 
 
         </Grid>

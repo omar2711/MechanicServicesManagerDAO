@@ -9,7 +9,13 @@
       Title="PgWelcome">
 
     <Grid>
-        <Label Content="Bienvenido" HorizontalAlignment="Center" FontSize="30" FontFamily="Arial" VerticalAlignment="Center" Height="42" Width="auto"/>
+        <StackPanel Orientation="Vertical">
+            <Image Source="/Assets/logo.png" Width="120" Margin="0,100,0,0"/>
+            <Label Content="Bienvenido" HorizontalAlignment="Center" FontSize="30" FontFamily="Arial" VerticalAlignment="Top" Margin="0,20,0,0" Height="42" Width="auto"/>
+            <Label Content="Software de manejo de" HorizontalAlignment="Center" FontSize="30" FontFamily="Arial" VerticalAlignment="Top" Height="42" Width="auto"/>
+            <Label Content="Servicios Mecanicos" HorizontalAlignment="Center" FontSize="30" FontFamily="Arial" VerticalAlignment="Top" Height="42" Width="auto"/>
+
+        </StackPanel>
 
     </Grid>
 </Page>

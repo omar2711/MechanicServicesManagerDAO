@@ -18,7 +18,7 @@ namespace mechanicDAO.Implementation
         {
             string query = @"UPDATE productCategory SET status = 0, modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
             SqlCommand command = CreateBasicCommand(query);
-            command.Parameters.AddWithValue("@userId", t.UserID);
+            command.Parameters.AddWithValue("@userId", SessionClass.ID);
             try
             {
                 command.Connection.Open();
@@ -37,9 +37,10 @@ namespace mechanicDAO.Implementation
 
         public int Insert(Model.productCategory t)
         {
-            string query = @"INSERT INTO productCategory(name, userId) VALUES (@name, 1)";
+            string query = @"INSERT INTO productCategory(name, userId) VALUES (@name, @userId)";
             SqlCommand command = CreateBasicCommand(query);
             command.Parameters.AddWithValue("@name", t.Name);
+            command.Parameters.AddWithValue("@userId", SessionClass.ID);
             try
             {
                 command.Connection.Open();
@@ -86,7 +87,7 @@ namespace mechanicDAO.Implementation
             string query = @"UPDATE productCategory SET name = @name, modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
             SqlCommand command = CreateBasicCommand(query);
             command.Parameters.AddWithValue("@name", t.Name);
-            command.Parameters.AddWithValue("@userId", "1");
+            command.Parameters.AddWithValue("@userId", SessionClass.ID);
             try
             {
                 command.Connection.Open();

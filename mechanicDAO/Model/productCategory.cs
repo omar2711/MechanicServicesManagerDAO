@@ -17,12 +17,15 @@ namespace mechanicDAO.Model
         {
             ID = iD;
             Name = name;
+            
         }
 
         public productCategory(string name)
         {
             Name = name;
         }
+         
+        
 
         public productCategory(string name, int iD)
         {

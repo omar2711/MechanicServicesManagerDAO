@@ -4,16 +4,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using mechanicDAO.Model;
 
 namespace mechanicDAO.Interfaces
 {
-    public interface IBase<T>
+    public interface IWorker : IBase<worker>
     {
-        int Insert(T t);
-        int Update(T t);
-        int Delete(T t);
-        DataTable Select();
+        int Update(worker t);
 
-        
+        DataTable Login(string userName, string password);
+
     }
 }

@@ -1,0 +1,26 @@
+﻿<Window x:Class="mechanicWPF.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:mechanicWPF"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="Login" Height="500" Width="300">
+    <Grid>
+
+        <StackPanel Orientation="Vertical">
+            <TextBlock FontSize="30" HorizontalAlignment="Center" Margin="0,50,0,0"> Mechanic Manager </TextBlock>
+            <Separator Background="OrangeRed" Width="180" />
+            <TextBlock FontSize="30" HorizontalAlignment="Center" Margin="0,10,0,0"> Login </TextBlock>
+            <Image Source="./Assets/logo.png" Width="100" Margin="0,10,0,0"/>
+            <Label Content="Nombre de Usuario" Margin="45,20,0,-15"/>
+            <TextBox x:Name="txtUsername" Style="{StaticResource LoginTxt}" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" />
+            <Label Content="Contraseña" Margin="45,0,0,-15"/>
+            <TextBox x:Name="txtPassword" Style="{StaticResource LoginTxt}" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" />
+            <Button x:Name="btnLogin" Style="{StaticResource LoginButtonStyle}" Margin="0,10,0,0" Content="Login" Click="btnLogin_Click"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

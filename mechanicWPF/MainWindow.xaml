@@ -23,18 +23,57 @@
                 <StackPanel Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
                     <Image Source="./Assets/logo.png" Width="30" Height="30" Margin="5"/>
                     <GridSplitter Width="1"  Background="Black" Margin="0,4,0,4" />
+                    
                     <Button Content="Categorias" Name="btnCategories" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="btnCategories_Click"/>
-                    <GridSplitter Width="1"  Background="Black" Margin="0,4,0,4" />
+                    <GridSplitter Width="1" x:Name="grdCategories"  Background="Black" Margin="0,4,0,4" />
+                    
                     <Button Content="Servicios" Name="btnServices" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="btnServices_Click"/>
+                    <GridSplitter Width="1" Name="grdServices" Background="Black" Margin="0,4,0,4" />
+                    
+                    <Button Content="Productos" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
                     <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
-                    <Button Content="hola" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
-                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
-                    <Button Content="hola" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
-                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
-                    <Button Content="hola" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
-                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
-                    <Button Content="hola" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
-                    <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
+
+                    <ToggleButton x:Name="DropdownButton" FontSize="14" Style="{StaticResource DropButton}" Content="Opciones de Administrador" HorizontalAlignment="Center" VerticalAlignment="Center"
+                      Click="DropdownButton_Click"/>
+                    <Popup x:Name="DropdownPopup" PlacementTarget="{Binding ElementName=DropdownButton}"
+                            Placement="Bottom" StaysOpen="False" AllowsTransparency="True" IsOpen="False">
+                        <Popup.Style>
+                            <Style TargetType="Popup">
+                                <Style.Triggers>
+                                    <Trigger Property="Popup.IsOpen" Value="True">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             From="0" To="1" Duration="1:1:1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                    </Trigger>
+                                    <Trigger Property="Popup.IsOpen" Value="False">
+                                        <Trigger.ExitActions>
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                             From="1" To="0" Duration="1:1:1.3"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Popup.Style>
+                        <Border Background="White" BorderBrush="Black" BorderThickness="1">
+                            <StackPanel>
+                                <Button Style="{StaticResource NavBarButtonStyle}" Content="Empleados" Name="btnWorkers" Click="btnWorkers_Click"/>
+                                <Button Style="{StaticResource NavBarButtonStyle}" Content="Option 2"/>
+                                <Button Style="{StaticResource NavBarButtonStyle}" Content="Option 3"/>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                    <GridSplitter Name="grdAdmn" Width="1" Background="Black" Margin="0,4,0,4" />
+
+
                 </StackPanel>
 
                 <Rectangle Fill="Orange" Grid.Row="0" Panel.ZIndex="-1"/>
@@ -46,7 +85,8 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <!--#region winControls -->
                     <Label x:Name="lblUserId" Visibility="Hidden"/>
-                    <Label Content="Juan Perez" Name="lblUserName" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    <Label x:Name="lblRoleId" Visibility="Hidden"/>
+                    <Label Content="User Name" Name="lblUserName" BorderThickness="0,0,0,1" FontFamily="arial" Foreground="Blue" BorderBrush="Blue" Padding="0,0,0,0" VerticalAlignment="Center" Margin="0,0,10,0" HorizontalAlignment="Left" MouseLeftButtonDown="lblUserName_MouseLeftButtonDown"/>
                     <Label Content="foto" BorderBrush="Black" Margin="0,0,10,0" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                     
