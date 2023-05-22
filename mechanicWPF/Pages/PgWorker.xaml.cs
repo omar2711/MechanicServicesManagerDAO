@@ -102,8 +102,7 @@ namespace mechanicWPF.Pages
 
 
 
-                SendMail correo = new SendMail();
-                correo.sendMail("El usuario se inserto con exito" + "\n" + "El nombre de usuario es: " + username + "\n" + "La contraseña de un solo uso es: " + password, txtEmail.Text, "Credenciales de Usuario");
+                workerImpl.sendMail("El usuario se inserto con exito" + "\n" + "El nombre de usuario es: " + username + "\n" + "La contraseña de un solo uso es: " + password, txtEmail.Text, "Credenciales de Usuario");
                 MessageBox.Show("Usuario creado con exito" + "\n" + "Se envio un correo con el usuario y contraseña");
 
                 //Thread emailThread = new Thread(() =>

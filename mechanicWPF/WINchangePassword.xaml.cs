@@ -27,6 +27,55 @@ namespace mechanicWPF
             InitializeComponent();
         }
 
+        bool verifyPasswordSecurity()
+        {
+            string password = txtPassConf.Password;
+            bool hasUpperCase = false;
+            bool hasLowerCase = false;
+            bool hasSpecialCharacter = false;
+            bool hasNumber = false;
+            bool hasLength = false;
+
+            if (password.Length >= 10)
+            {
+                hasLength = true;
+            }
+
+            //loop to verify if the password has an uppercase, lowercase, special character and number
+            foreach (char c in password)
+            {
+                if (char.IsUpper(c))
+                {
+                    hasUpperCase = true;
+                }
+                else if (char.IsLower(c))
+                {
+                    hasLowerCase = true;
+                }
+                else if (char.IsNumber(c))
+                {
+                    hasNumber = true;
+                }
+                else if (char.IsSymbol(c) || char.IsPunctuation(c))
+                {
+                    hasSpecialCharacter = true;
+                }
+            }
+
+            //if the password has all the requirements, return true
+            if (hasUpperCase == true && hasLowerCase == true && hasSpecialCharacter == true && hasNumber == true && hasLength == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+
+        }
+
         private void btnChange_Click(object sender, RoutedEventArgs e)
         {
             workerImpl workerImpl = new workerImpl();
@@ -34,20 +83,35 @@ namespace mechanicWPF
 
             if(SessionClass.SessionPassword == txtFirstPass.Password)
             {
-                try
+                if(txtNewPass.Password == txtPassConf.Password)
                 {
-                    workerImpl.UpdatePassword(txtNewPass.Password);
-                    MessageBox.Show("Contraseña actualizada");
-                    workerImpl.UpdateFirstTimeAccess(int.Parse(SessionClass.ID.ToString()));
-                    SessionClass.SessionPassword = txtNewPass.Password;
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
-                    this.Close();
+                    if(verifyPasswordSecurity() == true)
+                    {
+                        try
+                        {
+                            workerImpl.UpdatePassword(txtPassConf.Password);
+                            MessageBox.Show("Contraseña actualizada");
+                            workerImpl.UpdateFirstTimeAccess(int.Parse(SessionClass.ID.ToString()));
+                            SessionClass.SessionPassword = txtNewPass.Password;
+                            MainWindow mainWindow = new MainWindow();
+                            mainWindow.Show();
+                            this.Close();
+
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Error al actualizar la contraseña");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("La contraseña no cumple con los requisitos de seguridad");
+                    }
 
                 }
-                catch (Exception)
+                else
                 {
-                    MessageBox.Show("Error al actualizar la contraseña");
+                    MessageBox.Show("Las contraseñas no coinciden");
                 }
 
 

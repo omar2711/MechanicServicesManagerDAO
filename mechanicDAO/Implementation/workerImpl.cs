@@ -11,6 +11,8 @@ using System.ComponentModel;
 using Microsoft.SqlServer.Server;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography.X509Certificates;
+using System.Net.Mail;
+using System.Net;
 
 namespace mechanicDAO.Implementation
 {
@@ -35,7 +37,20 @@ namespace mechanicDAO.Implementation
                 command.Connection.Close();
             }
         }
-       
+
+        public void sendMail(string body, string to, string subject)
+        {
+            using (MailMessage mail = new MailMessage("minecraft3598@gmail.com", to, subject, body))
+            using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+            {
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential("minecraft3598@gmail.com", "rnkkljofwsaalwrb");
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+            }
+
+        }
+
 
         public void Insert(worker t, string pass)
         {
@@ -63,7 +78,7 @@ namespace mechanicDAO.Implementation
             commands[1].Parameters.AddWithValue("@userName", t.UserName);
             commands[1].Parameters.AddWithValue("@profilePic", "1");
             commands[1].Parameters.AddWithValue("@personId", id);
-            commands[1].Parameters.AddWithValue("@personId", t.Mail);
+            commands[1].Parameters.AddWithValue("@mail", t.Mail);
 
             try
             {

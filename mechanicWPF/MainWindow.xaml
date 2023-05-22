@@ -21,20 +21,41 @@
             <Grid Grid.Column="0" Margin="5,5,0,0" >
                 <!--#region menuButtons-->
                 <StackPanel Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
-                    <Image Source="./Assets/logo.png" Width="30" Height="30" Margin="5"/>
+                    <Image Source="./Assets/logo.png" Width="30" Height="30" Margin="10"/>
                     <GridSplitter Width="1"  Background="Black" Margin="0,4,0,4" />
-                    
-                    <Button Content="Categorias" Name="btnCategories" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="btnCategories_Click"/>
+
+                    <Button Name="btnCategories" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="btnCategories_Click">
+                        <TextBlock>
+                            <Image Source=".\Assets\categories.png" Width="30" Margin="0,0,-10,0"/>
+                            <Label Content="Categorias"/>
+                        </TextBlock>                        
+                    </Button>
                     <GridSplitter Width="1" x:Name="grdCategories"  Background="Black" Margin="0,4,0,4" />
-                    
-                    <Button Content="Servicios" Name="btnServices" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="btnServices_Click"/>
+
+                    <Button Name="btnServices" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="btnServices_Click">
+                        <TextBlock>
+                            <Image Source=".\Assets\gear.png" Width="30"/>
+                            <Label Content="Servicios"/>
+                        </TextBlock>
+                    </Button>
                     <GridSplitter Width="1" Name="grdServices" Background="Black" Margin="0,4,0,4" />
-                    
-                    <Button Content="Productos" FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}"/>
+
+                    <Button FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}">
+                        <TextBlock>
+                            
+                            <Image Source=".\Assets\product.png" Width="30"/>
+                            <Label Content="Productos"/>
+                        </TextBlock>
+                    </Button>
                     <GridSplitter Width="1" Background="Black" Margin="0,4,0,4" />
 
-                    <ToggleButton x:Name="DropdownButton" FontSize="14" Style="{StaticResource DropButton}" Content="Opciones de Administrador" HorizontalAlignment="Center" VerticalAlignment="Center"
-                      Click="DropdownButton_Click"/>
+                    <ToggleButton x:Name="DropdownButton" FontSize="14" Style="{StaticResource DropButton}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                      Click="DropdownButton_Click">
+                        <TextBlock>
+                            <Image Source=".\Assets\admin.png" Width="30"/>
+                            <Label Content="opciones de administrador"/>
+                        </TextBlock>
+                    </ToggleButton>
                     <Popup x:Name="DropdownPopup" PlacementTarget="{Binding ElementName=DropdownButton}"
                             Placement="Bottom" StaysOpen="False" AllowsTransparency="True" IsOpen="False">
                         <Popup.Style>
@@ -116,7 +137,7 @@
             </Grid>
         </Grid>
 
-        <Frame BorderBrush="OrangeRed" BorderThickness="1" x:Name="frame" Source="./Pages/PgWelcome.xaml" Margin="10" Height="635" NavigationUIVisibility="Hidden" />
+        <Frame BorderBrush="OrangeRed" BorderThickness="1" x:Name="frame" Source="./Pages/PgWelcome.xaml" Margin="10" MaxHeight="1000" MinHeight="620" NavigationUIVisibility="Hidden" />
     </StackPanel>
     
 
