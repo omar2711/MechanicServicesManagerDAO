@@ -31,32 +31,50 @@ namespace mechanicWPF
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            workerImpl workerImpl = new workerImpl();
             
             string pass = txtPassword.Password;
 
-           
-                DataTable table = new DataTable();
-                table = workerImpl.Login2(txtUsername.Text, pass);
-                if (table.Rows.Count > 0)
-                {
-                    SessionClass.ID = int.Parse(table.Rows[0][0].ToString());
-                    SessionClass.Username = table.Rows[0][1].ToString();
-                    SessionClass.SessionRole = table.Rows[0][2].ToString();
-                    SessionClass.SessionPassword = txtPassword.Password;
+            workerImpl workerImpl = new workerImpl();
+            DataTable table = new DataTable();
+            table = workerImpl.Login(txtUsername.Text, pass);
+            if (table.Rows.Count > 0)
+            {
+                SessionClass.ID = int.Parse(table.Rows[0][0].ToString());
+                SessionClass.Username = table.Rows[0][1].ToString();
+                SessionClass.SessionRole = table.Rows[0][2].ToString();
+                SessionClass.SessionPassword = txtPassword.Password;
 
+                if(workerImpl.SelectFirstTimeAccess() == 1)
+                {
+                WINchangePassword wINchangePassword = new WINchangePassword();
+                wINchangePassword.Show();
+                this.Close();
+                }
+                else
+                {
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
                     this.Close();
                 }
-                else
-                {
-                    Exception ex = new Exception();
-                    MessageBox.Show("Usuario o contraseña incorrectos");
-                }
+
+            }
+            else
+            {
+                Exception ex = new Exception();
+                MessageBox.Show("Usuario o contraseña incorrectos");
+            }
+
+            
+                
+           
+
+                
 
 
             
+
+
+
         }
     }
 }

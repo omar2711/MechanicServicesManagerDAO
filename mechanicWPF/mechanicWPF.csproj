@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\SendMail.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -75,6 +76,9 @@
     </Compile>
     <Compile Include="Pages\PgWelcome.xaml.cs">
       <DependentUpon>PgWelcome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WINchangePassword.xaml.cs">
+      <DependentUpon>WINchangePassword.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\DarkTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WINchangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

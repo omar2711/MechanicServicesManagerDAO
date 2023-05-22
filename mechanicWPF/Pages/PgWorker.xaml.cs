@@ -18,6 +18,8 @@ using mechanicDAO.Interfaces;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows.Media.TextFormatting;
+using mechanicWPF.Classes;
+using System.Threading;
 
 namespace mechanicWPF.Pages
 {
@@ -75,6 +77,7 @@ namespace mechanicWPF.Pages
                 worker.SecondLastName = txtSecondLastName.Text;
                 worker.CI = txtCi.Text;
                 worker.BranchID = int.Parse(txtBranchId.Text);
+                worker.Mail = txtEmail.Text;
                 worker.UserName = username;
                 worker.Password = password;
                 worker.ProfilePic = 1;
@@ -97,7 +100,23 @@ namespace mechanicWPF.Pages
 
                 }
 
-                MessageBox.Show("Username: " + username + "\nPassword: " + password);
+
+
+                SendMail correo = new SendMail();
+                correo.sendMail("El usuario se inserto con exito" + "\n" + "El nombre de usuario es: " + username + "\n" + "La contraseña de un solo uso es: " + password, txtEmail.Text, "Credenciales de Usuario");
+                MessageBox.Show("Usuario creado con exito" + "\n" + "Se envio un correo con el usuario y contraseña");
+
+                //Thread emailThread = new Thread(() =>
+                //{
+                //    SendMail correo = new SendMail();
+                //    correo.sendMail("El usuario se inserto con exito" + "\n" + "El nombre de usuario es: " + username + "\n" + "La contraseña de un solo uso es: " + password, txtEmail.Text, "Credenciales de Usuario");
+                //});
+
+                //emailThread.Start();
+
+
+
+
 
 
             }
@@ -125,7 +144,7 @@ namespace mechanicWPF.Pages
                     {
                         int cmbValue = int.Parse(cmbRole.SelectedValue.ToString());
                         int id = int.Parse(view.Row[0].ToString());
-                        worker worker = new worker(id, txtName.Text, txtSecondName.Text, txtLastName.Text, txtSecondLastName.Text, txtCi.Text, cmbValue, int.Parse(txtBranchId.Text), DateTime.Now, SessionClass.ID);
+                        worker worker = new worker(id, txtName.Text, txtSecondName.Text, txtLastName.Text, txtSecondLastName.Text, txtCi.Text, cmbValue, int.Parse(txtBranchId.Text), DateTime.Now, SessionClass.ID, txtEmail.Text.ToString());
                         //worker worker = new worker();
                         //worker.BranchID = int.Parse(txtBranchId.Text);
                         //worker.RoleID = cmbValue;
@@ -144,7 +163,7 @@ namespace mechanicWPF.Pages
                         try
                         {
                             workerImpl.Update(worker);
-                            MessageBox.Show("insertado");
+                            MessageBox.Show("Cliente Actualizado");
 
 
                         }

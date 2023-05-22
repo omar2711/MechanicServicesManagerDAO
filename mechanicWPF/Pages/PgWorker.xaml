@@ -30,6 +30,8 @@
             <Label Content="Sucursal" FontFamily="arial" FontSize="10" Background="White" BorderBrush="OrangeRed" BorderThickness="1" Width="43" Height="12" Panel.ZIndex="1" Margin="-170,4,0,1" Padding="0"/>
             <TextBox Name="txtBranchId" Style="{StaticResource TextBoxStyle}" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,-7,0,0"/>
             <ComboBox Name="cmbRole" HorizontalAlignment="Left" Width="240" VerticalAlignment="Top" Margin="10,10,0,0"/>
+            <Label Content="Email" FontFamily="arial" FontSize="10" Background="White" BorderBrush="OrangeRed" BorderThickness="1" Width="28" Height="12" Panel.ZIndex="1" Margin="-185,4,0,1" Padding="0"/>
+            <TextBox x:Name="txtEmail" Style="{StaticResource TextBoxStyle}" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,-7,0,0"/>
             <Button Content="Insertar" Name="btnInsert" Style="{StaticResource ButtonStyle}" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Click="btnInsert_Click"/>
             <Button Content="Editar" Name="btnEdit" Style="{StaticResource ButtonStyle}" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Click="btnEdit_Click"/>
             <Button Content="Eliminar" Name="btnDelete" Style="{StaticResource ButtonStyle}" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Click="btnDelete_Click"/>

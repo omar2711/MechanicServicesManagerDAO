@@ -66,9 +66,10 @@ namespace mechanicDAO.Model
         public person()
         {
         }
-        
 
-
+        public person(int iD, string name, string secondName, string lastName, string secondLastName, string cI, byte status, DateTime modificationDate, int userID) : this(iD)
+        {
+        }
     }
 
     
