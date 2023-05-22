@@ -37,6 +37,8 @@ namespace mechanicDAO.Model
             
         }
 
+        
+
 
         public worker(int roleID, int branchID, int personID, string userName, string password, int profilePic ,string name, string secondName, string lastName, string secondLastName, string cI) 
             : base(name, secondName, lastName, secondLastName, cI)
@@ -85,6 +87,8 @@ namespace mechanicDAO.Model
             : base(iD)
         {
         }
+
+        
 
 
         public worker(int iD, string name, string secondName, string lastName, string secondLastName, string cI, byte status, DateTime creationDate, DateTime modificationDate, int userID) 

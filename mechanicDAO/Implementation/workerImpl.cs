@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.ComponentModel;
 using Microsoft.SqlServer.Server;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography.X509Certificates;
 
 namespace mechanicDAO.Implementation
 {
@@ -35,10 +36,13 @@ namespace mechanicDAO.Implementation
             }
         }
 
-        public void Insert(worker t)
+        public void Insert(worker t, string pass)
         {
+            
+            
+
             string query1 = @"INSERT INTO person(name, secondName, lastName, secondLastName, ci, userId) VALUES (@name, @secondName, @lastName, @secondLastName, @ci, @userId)";
-            string query2 = @"INSERT INTO worker (roleId, branchId, personId, userName, password, profilePic) VALUES (@roleId, @branchId, @personId, @userName, HASHBYTES('MD5', '@pass'), @profilePic)";
+            string query2 = @"INSERT INTO worker (roleId, branchId, personId, userName, password, profilePic) VALUES (@roleId, @branchId, @personId, @userName, HASHBYTES('MD5', '" + pass + "'), @profilePic)";
 
             List<SqlCommand> commands = CreateNBasicCommand(2);
 
@@ -56,7 +60,6 @@ namespace mechanicDAO.Implementation
             commands[1].Parameters.AddWithValue("@roleId", t.RoleID);
             commands[1].Parameters.AddWithValue("@branchId", t.BranchID);
             commands[1].Parameters.AddWithValue("@userName", t.UserName);
-            commands[1].Parameters.AddWithValue("@pass", t.Password);
             commands[1].Parameters.AddWithValue("@profilePic", "1");
             commands[1].Parameters.AddWithValue("@personId", id);
 
@@ -113,11 +116,11 @@ namespace mechanicDAO.Implementation
             throw new NotImplementedException();
         }
 
-        public int Update(worker t)
+        public int  Update(worker t)
         {
             //update the person and worker atributes but without the password
             string query1 = @"UPDATE person SET name = @name, secondName = @secondName, lastName = @lastName, secondLastName = @secondLastName, ci = @ci, modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
-            string query2 = @"UPDATE worker SET roleId = @roleId, branchId = @branchId, userName = @userName, modificationDate = CURRENT_TIMESTAMP WHERE id = " + t.ID;
+            string query2 = @"UPDATE worker SET roleId = @roleId, branchId = @branchId WHERE personId = " + t.ID;
 
             List<SqlCommand> commands = CreateNBasicCommand(2);
 
@@ -133,12 +136,19 @@ namespace mechanicDAO.Implementation
 
             commands[1].Parameters.AddWithValue("@roleId", t.RoleID);
             commands[1].Parameters.AddWithValue("@branchId", t.BranchID);
-            commands[1].Parameters.AddWithValue("@userName", t.UserName);
+            
 
             try
             {
-                ExecuteNBasicCommand(commands);
-                return 1;
+                ExecuteDataTableCommand(commands[0]);
+                ExecuteDataTableCommand(commands[1]);
+
+                //ExecuteBasicCommand(commands[0]);
+                //ExecuteBasicCommand(commands[1]);
+
+                    return 1;
+
+                
             }
             catch (Exception ex)
             {
@@ -146,8 +156,10 @@ namespace mechanicDAO.Implementation
             }
             finally
             {
+                //close connection
                 commands[0].Connection.Close();
                 commands[1].Connection.Close();
+
             }
         }
 
@@ -155,7 +167,28 @@ namespace mechanicDAO.Implementation
         {
             string query = @"SELECT W.personId, W.userName, W.roleId, W.password
                                 FROM worker W INNER JOIN person P ON P.id = W.personId
-                                WHERE P.status = 1 AND W.userName = @userName AND W.password = HASHBYTES('MD5', '@pass')";
+                                WHERE P.status = 1 AND W.userName = @userName AND W.password = HASHBYTES('MD5', @pass)";
+            SqlCommand command = CreateBasicCommand(query);
+            command.Parameters.AddWithValue("@userName", userName);
+            command.Parameters.AddWithValue("@pass", password).SqlDbType = SqlDbType.VarChar;
+
+            try
+            {
+                return ExecuteDataTableCommand(command);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public DataTable Login2(string userName, string password)
+        {
+            string query = @"SELECT W.personId, W.userName, W.roleId, W.password
+                                FROM worker W LEFT JOIN person P ON P.id = W.personId
+                                WHERE P.status = 1 AND W.userName = @userName AND W.password = HASHBYTES('MD5', @pass)";
             SqlCommand command = CreateBasicCommand(query);
             command.Parameters.AddWithValue("@userName", userName);
             command.Parameters.AddWithValue("@pass", password).SqlDbType = SqlDbType.VarChar;
@@ -309,5 +342,42 @@ namespace mechanicDAO.Implementation
             }
         }
 
+        public void Update2(worker t, person p)
+        {
+            //update the person and worker atributes but without the password
+            string query1 = @"UPDATE person SET name = @name, secondName = @secondName, lastName = @lastName, secondLastName = @secondLastName, ci = @ci, modificationDate = CURRENT_TIMESTAMP, userId = @userId WHERE id = " + t.ID;
+            string query2 = @"UPDATE worker SET roleId = @roleId, branchId = @branchId WHERE personId = " + t.ID;
+
+            List<SqlCommand> commands = CreateNBasicCommand(2);
+
+            commands[0].CommandText = query1;
+            commands[1].CommandText = query2;
+
+            commands[0].Parameters.AddWithValue("@name", p.Name);
+            commands[0].Parameters.AddWithValue("@secondName", p.SecondName);
+            commands[0].Parameters.AddWithValue("@lastName", p.LastName);
+            commands[0].Parameters.AddWithValue("@secondLastName", p.SecondLastName);
+            commands[0].Parameters.AddWithValue("@ci", p.CI);
+            commands[0].Parameters.AddWithValue("@userId", SessionClass.ID);
+
+            commands[1].Parameters.AddWithValue("@roleId", t.RoleID);
+            commands[1].Parameters.AddWithValue("@branchId", t.BranchID);
+
+            try
+            {
+                ExecuteNBasicCommand(commands);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                commands[0].Connection.Close();
+                commands[1].Connection.Close();
+            }
+        }
     }
 }

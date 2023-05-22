@@ -179,6 +179,10 @@ namespace mechanicDAO.Implementation
 
                 throw ex;
             }
+            finally
+            {
+                command.Connection.Close();
+            }
 
             return reader;
         }

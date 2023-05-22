@@ -12,6 +12,8 @@ namespace mechanicDAO.Interfaces
     {
         int Update(worker t);
 
+        void Update2(worker t, person p);
+
         DataTable Login(string userName, string password);
 
     }

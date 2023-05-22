@@ -93,7 +93,7 @@ namespace mechanicWPF.Pages
                 if(workerImpl.CompareUserName(username)==false)
                 {
                     worker.UserName = username;
-                    workerImpl.Insert(worker);
+                    workerImpl.Insert(worker, password);
 
                 }
 
@@ -113,7 +113,7 @@ namespace mechanicWPF.Pages
         {
             DataRowView view = (DataRowView)dgtUsers.SelectedItem;
 
-            if(view == null)
+            if(view != null)
             {
                 if(txtBranchId.Text == "" || txtCi.Text == "" || txtLastName.Text == "" || txtName.Text == "" || txtSecondLastName.Text == "" || txtSecondName.Text == "")
                 {
@@ -126,16 +126,31 @@ namespace mechanicWPF.Pages
                         int cmbValue = int.Parse(cmbRole.SelectedValue.ToString());
                         int id = int.Parse(view.Row[0].ToString());
                         worker worker = new worker(id, txtName.Text, txtSecondName.Text, txtLastName.Text, txtSecondLastName.Text, txtCi.Text, cmbValue, int.Parse(txtBranchId.Text), DateTime.Now, SessionClass.ID);
+                        //worker worker = new worker();
+                        //worker.BranchID = int.Parse(txtBranchId.Text);
+                        //worker.RoleID = cmbValue;
+
+                        //person person = new person();
+                        //person.ID = id;
+                        //person.Name = txtName.Text;
+                        //person.SecondName = txtSecondName.Text;
+                        //person.LastName = txtLastName.Text;
+                        //person.SecondLastName = txtSecondLastName.Text;
+                        //person.CI = txtCi.Text;
+
+
                         workerImpl workerImpl = new workerImpl();
 
                         try
                         {
                             workerImpl.Update(worker);
+                            MessageBox.Show("insertado");
+
 
                         }
                         catch (Exception ex)
                         {
-
+                            MessageBox.Show(ex.Message);
                             throw ex;
                         }
                         

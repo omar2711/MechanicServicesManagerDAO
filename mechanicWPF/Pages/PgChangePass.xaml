@@ -11,11 +11,11 @@
     <Grid>
         <StackPanel>
             <Label Content="Introduce tu contraseña actual" Margin="20,25,0,0"/>
-            <TextBox x:Name="txtOldPass" Style="{StaticResource TextBoxStyle}" Width="200" Height="30" HorizontalAlignment="Left" Margin="20,5,0,0" />
+            <PasswordBox x:Name="txtOldPass" Style="{StaticResource PassTxt}" Width="200" Height="30" HorizontalAlignment="Left" Margin="20,5,0,0" />
             <Label Content="Introduce tu nueva contraseña" Margin="20,20,0,0"/>
-            <TextBox x:Name="txtNewPass" Width="200" Style="{StaticResource TextBoxStyle}" Height="30" HorizontalAlignment="Left" Margin="20,0,0,0" />
+            <PasswordBox x:Name="txtNewPass" Width="200" Style="{StaticResource PassTxt}" Height="30" HorizontalAlignment="Left" Margin="20,0,0,0" />
             <Label Content="Repite tu nueva contraseña" Margin="20,0,0,0"/>
-            <TextBox x:Name="txtNewPass2" Width="200" Style="{StaticResource TextBoxStyle}" Height="30" HorizontalAlignment="Left" Margin="20,0,0,0" />
+            <PasswordBox x:Name="txtNewPass2" Width="200" Style="{StaticResource PassTxt}" Height="30" HorizontalAlignment="Left" Margin="20,0,0,0" />
             <Button x:Name="btnChangePass" Content="Cambiar contraseña" Style="{StaticResource ButtonStyle}" Width="200" Height="30" HorizontalAlignment="Left" Margin="20,20,0,0" Click="btnChangePass_Click"/>
         </StackPanel>
 

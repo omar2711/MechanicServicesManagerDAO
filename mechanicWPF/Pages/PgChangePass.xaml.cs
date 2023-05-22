@@ -29,7 +29,7 @@ namespace mechanicWPF.Pages
 
         bool comparePass()
         {
-            if(txtNewPass.Text == txtNewPass2.Text)
+            if(txtNewPass.Password == txtNewPass2.Password)
             {
                 return true;
             }
@@ -42,7 +42,7 @@ namespace mechanicWPF.Pages
         //method to verify if the new password is of 10 characters, has an upercase, numbers, and special characters
         bool verifyPasswordSecurity()
         {
-            string password = txtNewPass.Text;
+            string password = txtNewPass.Password;
             bool hasUpperCase = false;
             bool hasLowerCase = false;
             bool hasSpecialCharacter = false;
@@ -96,17 +96,17 @@ namespace mechanicWPF.Pages
             workerImpl workerImpl = new workerImpl();
 
 
-            if(SessionClass.SessionPassword == txtOldPass.Text)
+            if(SessionClass.SessionPassword == txtOldPass.Password)
             {
                 if (comparePass() == true)
                 {
                     if (verifyPasswordSecurity() == true)
                     {
 
-                        worker.Password = txtNewPass.Text;
+                        worker.Password = txtNewPass.Password;
                         worker.PersonID = SessionClass.ID;
 
-                        workerImpl.UpdatePassword(txtNewPass2.Text);
+                        workerImpl.UpdatePassword(txtNewPass2.Password);
 
                         MessageBox.Show("Contraseña cambiada exitosamente");
 
