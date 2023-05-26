@@ -137,7 +137,7 @@
             </Grid>
         </Grid>
 
-        <Frame BorderBrush="OrangeRed" BorderThickness="1" x:Name="frame" Source="./Pages/PgWelcome.xaml" Margin="10" MaxHeight="1000" MinHeight="620" NavigationUIVisibility="Hidden" />
+        <Frame BorderBrush="OrangeRed" BorderThickness="1" x:Name="frame" Source="./Pages/PgWelcome.xaml" Margin="10" Height="600" MinHeight="620" NavigationUIVisibility="Hidden" />
     </StackPanel>
     
 

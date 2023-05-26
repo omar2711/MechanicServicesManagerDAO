@@ -16,6 +16,7 @@ using mechanicDAO.Implementation;
 using mechanicDAO.Model;
 using mechanicDAO.Interfaces;
 using System.Data;
+using mechanicDAO.Validations;
 
 namespace mechanicWPF.Pages
 {
@@ -71,21 +72,28 @@ namespace mechanicWPF.Pages
                 }
                 else
                 {
-                    try
+                    if (validations.IsOnlyLettersAndNumbers(txtCategory.Text))
                     {
-                        int id = int.Parse(view.Row.ItemArray[0].ToString());
-                        productCategory productCategory = new productCategory(txtCategory.Text, id);
-                        productCategoryImpl productCategoryImpl = new productCategoryImpl();
+                        try
+                        {
 
-                        productCategoryImpl.Update(productCategory);
-                        MessageBox.Show("Resgistro modificado con exito - " + DateTime.Now);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now + "\n" + ex.Message);
+                            int id = int.Parse(view.Row.ItemArray[0].ToString());
+                            productCategory productCategory = new productCategory(validations.EraseSpaces(txtCategory.Text), id);
+                            productCategoryImpl productCategoryImpl = new productCategoryImpl();
+
+                            productCategoryImpl.Update(productCategory);
+                            MessageBox.Show("Resgistro modificado con exito - " + DateTime.Now);
 
 
-                    }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now + "\n" + ex.Message);
+
+
+                        }
+                    } else MessageBox.Show("No se puede insertar caracteres especiales en el nombre del servicio");
+                   
                 }
 
 
@@ -136,28 +144,31 @@ namespace mechanicWPF.Pages
             }
             else
             {
-                productCategory category = new productCategory(txtCategory.Text);
-                productCategoryImpl implCategory = new productCategoryImpl();
-                try
+                if (validations.IsOnlyLettersAndNumbers(txtCategory.Text))
                 {
-                    int n = implCategory.Insert(category);
-                    if (n > 0)
+                    productCategory category = new productCategory(validations.EraseSpaces(txtCategory.Text));
+                    productCategoryImpl implCategory = new productCategoryImpl();
+                    try
                     {
-                        MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
-                        Select();
+                        int n = implCategory.Insert(category);
+                        if (n > 0)
+                        {
+                            MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
+                            Select();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now);
+
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now);
-
+                        MessageBox.Show(ex.Message);
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
 
-                txtCategory.Clear();
+                    txtCategory.Clear();
+                }else MessageBox.Show("No se puede insertar caracteres especiales en el nombre del servicio");
 
             }
 

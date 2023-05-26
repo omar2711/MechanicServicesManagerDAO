@@ -59,6 +59,7 @@
     <Compile Include="Model\SessionClass.cs" />
     <Compile Include="Model\worker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\validations.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

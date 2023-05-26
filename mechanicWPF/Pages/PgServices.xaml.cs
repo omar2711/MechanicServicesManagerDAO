@@ -16,6 +16,7 @@ using mechanicDAO.Implementation;
 using mechanicDAO.Model;
 using mechanicDAO.Interfaces;
 using System.Data;
+using mechanicDAO.Validations;
 
 
 namespace mechanicWPF.Pages
@@ -31,6 +32,8 @@ namespace mechanicWPF.Pages
             this.Loaded += new RoutedEventHandler(Page_Loaded);
 
         }
+
+        validations validations = new validations();
 
         //window loaded event
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -96,32 +99,49 @@ namespace mechanicWPF.Pages
                 }
                 else
                 {
-                    try
-                    {
-                        int id = int.Parse(view.Row[0].ToString());
-                        service service = new service(txtServiceName.Text, txtServiceDescription.Text, double.Parse(txtServicePrice.Text), id);
-                        serviceImpl implCategory = new serviceImpl();
 
-                        int n = implCategory.Update(service);
-                        if (n > 0)
+                    if (validations.IsOnlyDecimalNumbers(txtServicePrice.Text) == true)
+                    {
+                        if (validations.IsOnlyPositiveNumbers(txtServicePrice.Text))
                         {
-                            MessageBox.Show("Resgistro actualizado con exito - " + DateTime.Now);
-                            Select();
+                            if (validations.ContainsSpecialCharacters(txtServiceName.Text) == false)
+                            {
+                                try
+                                {
+                                    string serviceName = validations.EraseSpaces(txtServiceName.Text);
+                                    int id = int.Parse(view.Row[0].ToString());
+                                    service service = new service(serviceName, validations.EraseSpaces(txtServiceDescription.Text), double.Parse(validations.EraseSpaces(txtServicePrice.Text)), id);
+                                    serviceImpl implCategory = new serviceImpl();
+
+                                    int n = implCategory.Update(service);
+                                    if (n > 0)
+                                    {
+                                        MessageBox.Show("Resgistro actualizado con exito - " + DateTime.Now);
+                                        Select();
+                                    }
+                                    else MessageBox.Show("No se pudo actualizar el registro");
+
+                                }
+                                catch (Exception ex)
+                                {
+
+                                    MessageBox.Show(ex.Message);
+                                }
+
+                            }
+                            else MessageBox.Show("El nombre del servicio solo puede contener letras y numeros");
+
                         }
-                        else
-                        {
-                            MessageBox.Show("No se pudo actualizar el registro");
-                        }
+                        else MessageBox.Show("El precio debe ser un numero positivo");
 
                     }
-                    catch (Exception ex)
-                    {
+                    else MessageBox.Show("El precio debe ser un numero positivo");
 
-                        MessageBox.Show(ex.Message);
-                    }
+
                 }
             }
-            
+               
+
         }
         void Delete()
         {
@@ -142,10 +162,7 @@ namespace mechanicWPF.Pages
                             MessageBox.Show("Resgistro eliminado con exito - " + DateTime.Now);
                             Select();
                         }
-                        else
-                        {
-                            MessageBox.Show("No se pudo eliminar el registro");
-                        }
+                        else MessageBox.Show("No se pudo eliminar el registro");
 
                     }
                     catch (Exception ex)
@@ -154,15 +171,9 @@ namespace mechanicWPF.Pages
                         MessageBox.Show(ex.Message);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("No se borro el servicio");
-                }
+                else MessageBox.Show("No se borro el servicio");
             }                   
-            else
-            {
-                MessageBox.Show("Seleccione un registro");
-            }
+            else MessageBox.Show("Seleccione un registro");
         }
         #endregion
         
@@ -177,26 +188,39 @@ namespace mechanicWPF.Pages
             }
             else
             {
-                //make an if txtServicePrice is not a number
-                service service = new service(txtServiceName.Text, txtServiceDescription.Text, double.Parse(txtServicePrice.Text));
-                serviceImpl implCategory = new serviceImpl();
-                try
+
+                if (validations.IsOnlyDecimalNumbers(txtServicePrice.Text) == true)
                 {
-                    int n = implCategory.Insert(service);
-                    if (n > 0)
+                    if (validations.IsOnlyPositiveNumbers(txtServicePrice.Text))
                     {
-                        MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
-                        Select();
+                        if (validations.ContainsSpecialCharacters(txtServiceName.Text) == false)
+                        {
+                            service service = new service(validations.EraseSpaces(txtServiceName.Text), validations.EraseSpaces(txtServiceDescription.Text), double.Parse(validations.EraseSpaces(txtServicePrice.Text)));
+                            serviceImpl implCategory = new serviceImpl();
+                            try
+                            {
+                                int n = implCategory.Insert(service);
+                                if (n > 0)
+                                {
+                                    MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
+                                    Select();
+                                }
+                                else MessageBox.Show("No se pudo insertar el registro");
+                                
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+
+                        }
+                        else MessageBox.Show("El nombre del servicio solo puede contener letras y numeros");
+                       
                     }
-                    else
-                    {
-                        MessageBox.Show("No se pudo insertar el registro");
-                    }
+                    else MessageBox.Show("El precio debe ser un numero positivo");
+                    
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                else MessageBox.Show("El precio debe ser un numero positivo");
 
 
             }
@@ -231,17 +255,5 @@ namespace mechanicWPF.Pages
             }
         }
 
-        #region data validation
-        private void NumericOnly(System.Object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-            e.Handled = IsTextNumeric(e.Text);
-        }
-
-        public static bool IsTextNumeric(string str)
-        {
-            System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex("[^0-9]");
-            return reg.IsMatch(str);
-        }
-        #endregion
     }
 }
