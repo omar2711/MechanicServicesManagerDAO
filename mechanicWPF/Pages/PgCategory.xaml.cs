@@ -72,7 +72,7 @@ namespace mechanicWPF.Pages
                 }
                 else
                 {
-                    if (validations.IsOnlyLettersAndNumbers(txtCategory.Text))
+                    if (validations.ContainsSpecialCharacters(txtCategory.Text)==false)
                     {
                         try
                         {
@@ -92,7 +92,7 @@ namespace mechanicWPF.Pages
 
 
                         }
-                    } else MessageBox.Show("No se puede insertar caracteres especiales en el nombre del servicio");
+                    } else MessageBox.Show("No se puede insertar caracteres especiales en el nombre de la categoria");
                    
                 }
 
@@ -144,7 +144,7 @@ namespace mechanicWPF.Pages
             }
             else
             {
-                if (validations.IsOnlyLettersAndNumbers(txtCategory.Text))
+                if (validations.ContainsSpecialCharacters(txtCategory.Text)==false)
                 {
                     productCategory category = new productCategory(validations.EraseSpaces(txtCategory.Text));
                     productCategoryImpl implCategory = new productCategoryImpl();
@@ -168,7 +168,7 @@ namespace mechanicWPF.Pages
                     }
 
                     txtCategory.Clear();
-                }else MessageBox.Show("No se puede insertar caracteres especiales en el nombre del servicio");
+                }else MessageBox.Show("No se puede insertar caracteres especiales en el nombre de la categoria");
 
             }
 

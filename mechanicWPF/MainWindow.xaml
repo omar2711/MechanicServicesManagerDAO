@@ -40,7 +40,7 @@
                     </Button>
                     <GridSplitter Width="1" Name="grdServices" Background="Black" Margin="0,4,0,4" />
 
-                    <Button FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}">
+                    <Button FontFamily="Arial" FontSize="17" Style="{StaticResource NavBarButtonStyle}" Click="Button_Click">
                         <TextBlock>
                             
                             <Image Source=".\Assets\product.png" Width="30"/>

@@ -16,9 +16,9 @@
             <TextBlock FontSize="30" HorizontalAlignment="Center" Margin="0,10,0,0"> Login </TextBlock>
             <Image Source="./Assets/logo.png" Width="100" Margin="0,10,0,0"/>
             <Label Content="Nombre de Usuario" Margin="45,20,0,-15"/>
-            <TextBox x:Name="txtUsername" Style="{StaticResource LoginTxt}" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" />
+            <TextBox x:Name="txtUsername" Style="{StaticResource LoginTxt}" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" KeyDown="txtUsername_KeyDown" />
             <Label Content="Contraseña" Margin="45,0,0,-15"/>
-            <PasswordBox x:Name="txtPassword" Style="{StaticResource PassTxt}" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" />
+            <PasswordBox x:Name="txtPassword" Style="{StaticResource PassTxt}" HorizontalAlignment="Center" Width="200" Margin="0,10,0,0" KeyDown="txtPassword_KeyDown"/>
             <Button x:Name="btnLogin" Style="{StaticResource LoginButtonStyle}" Margin="0,10,0,0" Content="Login" Click="btnLogin_Click"/>
         </StackPanel>
         

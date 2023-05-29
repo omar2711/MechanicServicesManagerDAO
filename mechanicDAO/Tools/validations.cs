@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace mechanicDAO.Validations
         {
             foreach (char c in text)
             {
-                if (!char.IsLetter(c))
+                if (!char.IsLetter(c) && !char.IsWhiteSpace(c))
                 {
                     return false;
                 }
@@ -24,8 +25,31 @@ namespace mechanicDAO.Validations
         public static string EraseSpaces(string text)
         {
             string newText = text.TrimEnd();
-            return newText;
+            newText = newText.TrimStart();
+
+            string cadenaConEspacios = newText;
+            string cadenaSinEspaciosNoSpace = Regex.Replace(cadenaConEspacios, @"\s+", " ").Trim();
+
+
+            return cadenaSinEspaciosNoSpace;
         }
+
+        //create a method to erase inner spaces from a text 
+
+        public static bool isOnlyNumber(string text)
+        {
+            foreach(char c in text)
+            {
+                if (!char.IsLetter(c) && !char.IsSymbol(c))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
 
         public static bool IsOnlyDecimalNumbers(string text)
         {
@@ -56,7 +80,7 @@ namespace mechanicDAO.Validations
 
         public static bool IsValidEmail(string text)
         {
-            if (text.Contains("@") && text.Contains("."))
+            if (text.Contains("@") && text.Contains(".com"))
             {
                 return true;
             }

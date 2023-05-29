@@ -64,17 +64,28 @@ namespace mechanicWPF
                 MessageBox.Show("Usuario o contraseña incorrectos");
             }
 
-            
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Key == Key.Enter)
+            {
                 
-           
-
-                
-
-
-            
-
+                btnLogin_Click(sender, e);
+            }
 
 
         }
+
+        private void txtUsername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+
+                btnLogin_Click(sender, e);
+            }
+        }
+
     }
 }

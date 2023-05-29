@@ -105,6 +105,26 @@ namespace mechanicDAO.Implementation
             
         }
 
+        public DataTable SelectComboCat()
+        {
+            string query = @"SELECT id, name FROM productCategory WHERE status = 1";
+            SqlCommand command = CreateBasicCommand(query);
+
+            try
+            {
+                return ExecuteDataTableCommand(command);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                command.Connection.Close();
+            }
+
+        }
+
         public productCategory Get(byte id)
         {
             productCategory t = null;

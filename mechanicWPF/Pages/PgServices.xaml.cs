@@ -86,6 +86,9 @@ namespace mechanicWPF.Pages
 
 
         } 
+
+
+
         void Update()
         {
             DataRowView view = (DataRowView)dgvServices.SelectedItem;
@@ -102,7 +105,7 @@ namespace mechanicWPF.Pages
 
                     if (validations.IsOnlyDecimalNumbers(txtServicePrice.Text) == true)
                     {
-                        if (validations.IsOnlyPositiveNumbers(txtServicePrice.Text))
+                        if (validations.IsOnlyPositiveNumbers(txtServicePrice.Text)==true)
                         {
                             if (validations.ContainsSpecialCharacters(txtServiceName.Text) == false)
                             {
@@ -191,7 +194,7 @@ namespace mechanicWPF.Pages
 
                 if (validations.IsOnlyDecimalNumbers(txtServicePrice.Text) == true)
                 {
-                    if (validations.IsOnlyPositiveNumbers(txtServicePrice.Text))
+                    if (validations.IsOnlyPositiveNumbers(txtServicePrice.Text)==true)
                     {
                         if (validations.ContainsSpecialCharacters(txtServiceName.Text) == false)
                         {

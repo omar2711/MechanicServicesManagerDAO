@@ -124,5 +124,10 @@ namespace mechanicWPF
         {
             frame.Content = new PgProfile();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            frame.Content = new PgProduct();
+        }
     }
 }

@@ -68,6 +68,9 @@
     <Compile Include="Pages\PgChangeUserName.xaml.cs">
       <DependentUpon>PgChangeUserName.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PgProduct.xaml.cs">
+      <DependentUpon>PgProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PgProfile.xaml.cs">
       <DependentUpon>PgProfile.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PgChangeUserName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PgProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

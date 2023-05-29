@@ -82,8 +82,7 @@ namespace mechanicWPF.Pages
                         {
                             if(validations.IsOnlyLetters(txtSecondLastName.Text)==true || txtSecondLastName.Text == "")
                             {
-                                if (validations.IsvalidCi(txtCi.Text) == true)
-                                {
+                               
                                     if (validations.IsOnlyPositiveIntNumbers(txtBranchId.Text) == true)
                                     {
                                         if (roleId != 0)
@@ -92,7 +91,10 @@ namespace mechanicWPF.Pages
                                             {
                                                 try
                                                 {
-                                                    string username = txtName.Text.Substring(0, 4) + txtSecondName.Text.Substring(0, 4) + txtCi.Text.Substring(0, 4);
+                                                    string username;
+                                                    
+                                                    username = txtName.Text.Substring(0, 2) + txtSecondName.Text.Substring(0, 2) + txtCi.Text.Substring(0, 4);
+
 
                                                     string password = Guid.NewGuid().ToString().Substring(0, 10);
 
@@ -132,10 +134,9 @@ namespace mechanicWPF.Pages
                                                     workerImpl.sendMail("El usuario se inserto con exito" + "\n" + "El nombre de usuario es: " + username + "\n" + "La contraseña de un solo uso es: " + password, txtEmail.Text, "Credenciales de Usuario");
                                                     MessageBox.Show("Usuario creado con exito" + "\n" + "Se envio un correo con el usuario y contraseña");
                                                 }
-                                                catch (Exception)
+                                                catch (Exception ex)
                                                 {
-
-                                                    throw;
+                                                MessageBox.Show(ex.Message);
                                                 }
                                             }
                                             else MessageBox.Show("El correo no es valido");
@@ -143,8 +144,6 @@ namespace mechanicWPF.Pages
                                         else MessageBox.Show("Debe seleccionar un rol");
                                     }
                                     else MessageBox.Show("El ID de sucursal solo puede ser numeros positivos");
-                                }
-                                else MessageBox.Show("El CI no es valido");
                                 
                             }
                             else MessageBox.Show("El segundo apellido solo puede contener letras o en caso de no tener debe estar en blanco");
@@ -183,8 +182,7 @@ namespace mechanicWPF.Pages
                                 {
                                     if (validations.IsOnlyPositiveIntNumbers(txtBranchId.Text) == true)
                                     {
-                                        if(validations.IsvalidCi(txtCi.Text) == true)
-                                        {
+                                        
                                             if (roleId != 0)
                                             {
                                                 if (validations.IsValidEmail(txtEmail.Text) == true)
@@ -214,15 +212,14 @@ namespace mechanicWPF.Pages
                                                     catch (Exception)
                                                     {
 
-                                                        throw;
+                                                        MessageBox.Show("Error al actualizar el cliente");
                                                     }
                                                 }
                                                 else MessageBox.Show("El correo no es valido");
                                             }
                                             else MessageBox.Show("Debe seleccionar un rol");
 
-                                        }
-                                        else MessageBox.Show("El CI no es valido");
+                                        
                                         
                                     }
                                     else MessageBox.Show("El ID de sucursal solo puede ser numeros positivos");
@@ -319,8 +316,8 @@ namespace mechanicWPF.Pages
                 txtLastName.Text = view[3].ToString();
                 txtSecondLastName.Text = view[4].ToString();
                 txtCi.Text = view[5].ToString();
-                txtBranchId.Text = view[7].ToString();
-                cmbRole.SelectedItem = view[8].ToString();
+                txtBranchId.Text = view[8].ToString();
+                txtEmail.Text = view[7].ToString();
             }
 
         }

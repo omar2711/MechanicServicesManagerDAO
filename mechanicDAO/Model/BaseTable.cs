@@ -21,6 +21,13 @@ namespace mechanicDAO.Model
             UserID = userID;
         }
 
+        public BaseTable(byte status, DateTime modificationDate, int userID)
+        {
+            Status = status;
+            ModificationDate = modificationDate;
+            UserID = userID;
+        }
+
         public BaseTable(DateTime modificationDate, int userID)
         {
             ModificationDate = modificationDate;
