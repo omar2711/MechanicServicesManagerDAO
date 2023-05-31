@@ -103,33 +103,41 @@ namespace mechanicWPF.Pages
                 else
                 {
 
-                    if (validations.IsOnlyDecimalNumbers(txtServicePrice.Text) == true)
+                    if (validations.isOnlyPositiveNumbers(txtServicePrice.Text) == true)
                     {
-                        if (validations.IsOnlyPositiveNumbers(txtServicePrice.Text)==true)
+                        if (validations.isOnlyPositiveNumbers(txtServicePrice.Text)==true)
                         {
-                            if (validations.ContainsSpecialCharacters(txtServiceName.Text) == false)
+                            if (validations.IsOnlyLettersNumbers(txtServiceName.Text) == true)
                             {
-                                try
+                                if (validations.ContainsAtLeastOneLetter(txtServiceName.Text) == true)
                                 {
-                                    string serviceName = validations.EraseSpaces(txtServiceName.Text);
-                                    int id = int.Parse(view.Row[0].ToString());
-                                    service service = new service(serviceName, validations.EraseSpaces(txtServiceDescription.Text), double.Parse(validations.EraseSpaces(txtServicePrice.Text)), id);
-                                    serviceImpl implCategory = new serviceImpl();
-
-                                    int n = implCategory.Update(service);
-                                    if (n > 0)
+                                    if (validations.ContainsAtLeastOneLetter(txtServiceDescription.Text) == true)
                                     {
-                                        MessageBox.Show("Resgistro actualizado con exito - " + DateTime.Now);
-                                        Select();
+                                        try
+                                        {
+                                            string serviceName = validations.EraseSpaces(txtServiceName.Text);
+                                            int id = int.Parse(view.Row[0].ToString());
+                                            service service = new service(serviceName, validations.EraseSpaces(txtServiceDescription.Text), double.Parse(validations.EraseSpaces(txtServicePrice.Text)), id);
+                                            serviceImpl implCategory = new serviceImpl();
+
+                                            int n = implCategory.Update(service);
+                                            if (n > 0)
+                                            {
+                                                MessageBox.Show("Resgistro actualizado con exito - " + DateTime.Now);
+                                                Select();
+                                            }
+                                            else MessageBox.Show("No se pudo actualizar el registro");
+
+                                        }
+                                        catch (Exception ex)
+                                        {
+
+                                            MessageBox.Show(ex.Message);
+                                        }
                                     }
-                                    else MessageBox.Show("No se pudo actualizar el registro");
-
+                                    else MessageBox.Show("La descripcion del servicio debe contener al menos una letra");
                                 }
-                                catch (Exception ex)
-                                {
-
-                                    MessageBox.Show(ex.Message);
-                                }
+                                else MessageBox.Show("El nombre del servicio debe contener al menos una letra");
 
                             }
                             else MessageBox.Show("El nombre del servicio solo puede contener letras y numeros");
@@ -192,29 +200,38 @@ namespace mechanicWPF.Pages
             else
             {
 
-                if (validations.IsOnlyDecimalNumbers(txtServicePrice.Text) == true)
+                if (validations.isOnlyPositiveNumbers(txtServicePrice.Text) == true)
                 {
-                    if (validations.IsOnlyPositiveNumbers(txtServicePrice.Text)==true)
+                    if (validations.isOnlyPositiveNumbers(txtServicePrice.Text)==true)
                     {
-                        if (validations.ContainsSpecialCharacters(txtServiceName.Text) == false)
+                        if (validations.IsOnlyLettersNumbers(txtServiceName.Text) == true)
                         {
-                            service service = new service(validations.EraseSpaces(txtServiceName.Text), validations.EraseSpaces(txtServiceDescription.Text), double.Parse(validations.EraseSpaces(txtServicePrice.Text)));
-                            serviceImpl implCategory = new serviceImpl();
-                            try
+                            if (validations.ContainsAtLeastOneLetter(txtServiceName.Text) == true)
                             {
-                                int n = implCategory.Insert(service);
-                                if (n > 0)
+                                if (validations.ContainsAtLeastOneLetter(txtServiceDescription.Text) == true)
                                 {
-                                    MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
-                                    Select();
+                                    service service = new service(validations.EraseSpaces(txtServiceName.Text), validations.EraseSpaces(txtServiceDescription.Text), double.Parse(validations.EraseSpaces(txtServicePrice.Text)));
+                                    serviceImpl implCategory = new serviceImpl();
+                                    try
+                                    {
+                                        int n = implCategory.Insert(service);
+                                        if (n > 0)
+                                        {
+                                            MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
+                                            Select();
+                                        }
+                                        else MessageBox.Show("No se pudo insertar el registro");
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                    }
                                 }
-                                else MessageBox.Show("No se pudo insertar el registro");
-                                
+                                else MessageBox.Show("La descripcion del servicio debe contener almenos una letra");
+
                             }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message);
-                            }
+                            else MessageBox.Show("El nombre del servicio debe contener almenos una letra");
 
                         }
                         else MessageBox.Show("El nombre del servicio solo puede contener letras y numeros");

@@ -82,69 +82,71 @@ namespace mechanicWPF.Pages
                         {
                             if(validations.IsOnlyLetters(txtSecondLastName.Text)==true || txtSecondLastName.Text == "")
                             {
-                               
-                                    if (validations.IsOnlyPositiveIntNumbers(txtBranchId.Text) == true)
+                                if (validations.isOnlyPositiveNumbers(txtBranchId.Text) == true)
+                                {
+                                    if (roleId != 0)
                                     {
-                                        if (roleId != 0)
+                                        bool isValid = validations.IsValidEmail(txtEmail.Text);
+                                        if (isValid)
                                         {
-                                            if (validations.IsValidEmail(txtEmail.Text) == true)
+                                            try
                                             {
-                                                try
+                                                string username;
+
+                                                username = txtName.Text.Substring(0, 2) + txtSecondName.Text.Substring(0, 2) + txtCi.Text.Substring(0, 4);
+
+
+                                                string password = Guid.NewGuid().ToString().Substring(0, 10);
+
+                                                string branch = validations.EraseSpaces(txtBranchId.Text);
+
+                                                workerImpl workerImpl = new workerImpl();
+                                                worker worker = new worker();
+                                                worker.Name = validations.EraseSpaces(txtName.Text);
+                                                worker.SecondName = validations.EraseSpaces(txtSecondName.Text);
+                                                worker.LastName = validations.EraseSpaces(txtLastName.Text);
+                                                worker.SecondLastName = validations.EraseSpaces(txtSecondLastName.Text);
+                                                worker.CI = validations.EraseSpaces(txtCi.Text);
+                                                worker.BranchID = int.Parse(branch);
+                                                worker.Mail = validations.EraseSpaces(txtEmail.Text);
+                                                worker.UserName = username;
+                                                worker.Password = password;
+                                                worker.ProfilePic = 1;
+                                                worker.UserID = SessionClass.ID;
+                                                worker.RoleID = int.Parse(cmbRole.SelectedValue.ToString());
+
+                                                while (workerImpl.CompareUserName(username) == true)
                                                 {
-                                                    string username;
-                                                    
-                                                    username = txtName.Text.Substring(0, 2) + txtSecondName.Text.Substring(0, 2) + txtCi.Text.Substring(0, 4);
+                                                    Random rnd = new Random();
+                                                    int number = rnd.Next(1000, 9999);
 
+                                                    username = username + number;
 
-                                                    string password = Guid.NewGuid().ToString().Substring(0, 10);
+                                                }
 
-                                                    string branch = validations.EraseSpaces(txtBranchId.Text);
-
-                                                    workerImpl workerImpl = new workerImpl();
-                                                    worker worker = new worker();
-                                                    worker.Name = validations.EraseSpaces(txtName.Text);
-                                                    worker.SecondName = validations.EraseSpaces(txtSecondName.Text);
-                                                    worker.LastName = validations.EraseSpaces(txtLastName.Text);
-                                                    worker.SecondLastName = validations.EraseSpaces(txtSecondLastName.Text);
-                                                    worker.CI = validations.EraseSpaces(txtCi.Text);
-                                                    worker.BranchID = int.Parse(branch);
-                                                    worker.Mail = validations.EraseSpaces(txtEmail.Text);
+                                                if (workerImpl.CompareUserName(username) == false)
+                                                {
                                                     worker.UserName = username;
-                                                    worker.Password = password;
-                                                    worker.ProfilePic = 1;
-                                                    worker.UserID = SessionClass.ID;
-                                                    worker.RoleID = int.Parse(cmbRole.SelectedValue.ToString());
+                                                    workerImpl.Insert(worker, password);
 
-                                                    while (workerImpl.CompareUserName(username) == true)
-                                                    {
-                                                        Random rnd = new Random();
-                                                        int number = rnd.Next(1000, 9999);
-
-                                                        username = username + number;
-
-                                                    }
-
-                                                    if (workerImpl.CompareUserName(username) == false)
-                                                    {
-                                                        worker.UserName = username;
-                                                        workerImpl.Insert(worker, password);
-
-                                                    }
-
-                                                    workerImpl.sendMail("El usuario se inserto con exito" + "\n" + "El nombre de usuario es: " + username + "\n" + "La contraseña de un solo uso es: " + password, txtEmail.Text, "Credenciales de Usuario");
-                                                    MessageBox.Show("Usuario creado con exito" + "\n" + "Se envio un correo con el usuario y contraseña");
                                                 }
-                                                catch (Exception ex)
-                                                {
-                                                MessageBox.Show(ex.Message);
-                                                }
+
+                                                workerImpl.sendMail("El usuario se inserto con exito" + "\n" + "El nombre de usuario es: " + username + "\n" + "La contraseña de un solo uso es: " + password, txtEmail.Text, "Credenciales de Usuario");
+                                                MessageBox.Show("Usuario creado con exito" + "\n" + "Se envio un correo con el usuario y contraseña");
                                             }
-                                            else MessageBox.Show("El correo no es valido");
+                                            catch (Exception ex)
+                                            {
+                                                MessageBox.Show(ex.Message);
+                                            }
+
                                         }
-                                        else MessageBox.Show("Debe seleccionar un rol");
+                                        else MessageBox.Show("Debe tener");
+
                                     }
-                                    else MessageBox.Show("El ID de sucursal solo puede ser numeros positivos");
-                                
+                                    else MessageBox.Show("Debe seleccionar un rol");
+                                }
+                                else MessageBox.Show("El ID de sucursal solo puede ser numeros positivos");
+
                             }
                             else MessageBox.Show("El segundo apellido solo puede contener letras o en caso de no tener debe estar en blanco");
                         }
@@ -172,7 +174,10 @@ namespace mechanicWPF.Pages
                 }
                 else
                 {
-                    if (validations.IsOnlyLetters(txtName.Text) == true)
+
+                    string name = validations.EraseSpaces(txtName.Text);
+
+                    if (validations.IsOnlyLetters(name) == true)
                     {
                         if (validations.IsOnlyLetters(txtSecondName.Text) == true)
                         {
@@ -180,49 +185,49 @@ namespace mechanicWPF.Pages
                             {
                                 if (validations.IsOnlyLetters(txtSecondLastName.Text) == true || txtSecondLastName.Text == "")
                                 {
-                                    if (validations.IsOnlyPositiveIntNumbers(txtBranchId.Text) == true)
+                                    if (validations.isOnlyPositiveNumbers(txtBranchId.Text) == true)
                                     {
-                                        
-                                            if (roleId != 0)
+                                        if (roleId != 0)
+                                        {
+                                            bool isValid = validations.IsValidEmail(txtEmail.Text);
+                                            if (isValid)
                                             {
-                                                if (validations.IsValidEmail(txtEmail.Text) == true)
+                                                try
                                                 {
+                                                    int cmbValue = int.Parse(cmbRole.SelectedValue.ToString());
+                                                    int id = int.Parse(view.Row[0].ToString());
+                                                    worker worker = new worker(id, validations.EraseSpaces(txtName.Text), validations.EraseSpaces(txtSecondName.Text), validations.EraseSpaces(txtLastName.Text), validations.EraseSpaces(txtSecondLastName.Text), validations.EraseSpaces(txtCi.Text), cmbValue, int.Parse(branch), DateTime.Now, SessionClass.ID, validations.EraseSpaces(txtEmail.Text.ToString()));
+
+                                                    workerImpl workerImpl = new workerImpl();
+
                                                     try
                                                     {
-                                                        int cmbValue = int.Parse(cmbRole.SelectedValue.ToString());
-                                                        int id = int.Parse(view.Row[0].ToString());
-                                                        worker worker = new worker(id, validations.EraseSpaces(txtName.Text), validations.EraseSpaces(txtSecondName.Text), validations.EraseSpaces(txtLastName.Text), validations.EraseSpaces(txtSecondLastName.Text), validations.EraseSpaces(txtCi.Text), cmbValue, int.Parse(branch), DateTime.Now, SessionClass.ID, validations.EraseSpaces(txtEmail.Text.ToString()));
+                                                        workerImpl.Update(worker);
+                                                        MessageBox.Show("Cliente Actualizado");
 
-                                                        workerImpl workerImpl = new workerImpl();
-
-                                                        try
-                                                        {
-                                                            workerImpl.Update(worker);
-                                                            MessageBox.Show("Cliente Actualizado");
-
-
-                                                        }
-                                                        catch (Exception ex)
-                                                        {
-                                                            MessageBox.Show(ex.Message);
-                                                            throw ex;
-                                                        }
 
                                                     }
-                                                    catch (Exception)
+                                                    catch (Exception ex)
                                                     {
-
-                                                        MessageBox.Show("Error al actualizar el cliente");
+                                                        MessageBox.Show(ex.Message);
+                                                        throw ex;
                                                     }
-                                                }
-                                                else MessageBox.Show("El correo no es valido");
-                                            }
-                                            else MessageBox.Show("Debe seleccionar un rol");
 
-                                        
-                                        
+                                                }
+                                                catch (Exception)
+                                                {
+
+                                                    MessageBox.Show("Error al actualizar el cliente");
+                                                }
+
+                                            }
+                                            else MessageBox.Show("Debe tener");
+
+                                        }
+                                        else MessageBox.Show("Debe seleccionar un rol");
                                     }
                                     else MessageBox.Show("El ID de sucursal solo puede ser numeros positivos");
+
                                 }
                                 else MessageBox.Show("El segundo apellido solo puede contener letras o en caso de no tener debe estar en blanco");
                             }
@@ -232,9 +237,16 @@ namespace mechanicWPF.Pages
                     }
                     else MessageBox.Show("El nombre solo puede contener letras");
 
+
                 }
 
             }
+
+
+
+            
+
+
 
         }
 
@@ -248,7 +260,7 @@ namespace mechanicWPF.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message+"\n"+cmbRole.SelectedValue);
+                MessageBox.Show("No se pudo crear al empleado");
             }
         }
 

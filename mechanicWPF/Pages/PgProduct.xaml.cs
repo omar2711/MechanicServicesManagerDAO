@@ -125,8 +125,8 @@ namespace mechanicWPF.Pages
 
         }
 
-        int brandId = 0;
-        int catId = 0;
+        public int brandId = 0;
+        public int catId = 0;
 
 
         private void cmbBrand_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -139,64 +139,61 @@ namespace mechanicWPF.Pages
             catId = int.Parse(cmbCategory.SelectedValue.ToString());
         }
 
-
-
-
-
-
-
-
         private void btnInsert_Click(object sender, RoutedEventArgs e)
         {
 
-            
             if (txtName.Text != "")
             {
                 if (txtPrice.Text != "")
                 {
                     if (txtStock.Text != "")
                     {
-                        if (validations.IsOnlyDecimalNumbers(txtPrice.Text) && double.Parse(txtPrice.Text) > 0)
+                        if (validations.IsOnlyLettersNumbers(txtName.Text) == true)
                         {
-                            if (validations.IsOnlyPositiveNumbers(txtPrice.Text))
+                            if (validations.ContainsAtLeastOneLetter(txtName.Text) == true)
                             {
-                                if (validations.isOnlyNumber(txtStock.Text))
+                                if (validations.isOnlyPositiveNumbers(txtPrice.Text) && double.Parse(txtPrice.Text) > 0)
                                 {
-                                    if(catId == 0 || brandId == 0)
+                                    if (validations.isOnlyNumbers(txtStock.Text))
                                     {
-                                        try
+                                        if (catId != 0 && brandId != 0)
                                         {
-                                            string newName = validations.EraseSpaces(txtName.Text);
+                                            try
+                                            {
+                                                string newName = validations.EraseSpaces(txtName.Text);
 
-                                            double price = double.Parse(txtPrice.Text);
-                                            productImpl productImpl = new productImpl();
-                                            product product = new product();
-                                            product.Name = newName;
-                                            product.Price = Double.Parse(txtPrice.Text);
-                                            product.Stock = Int32.Parse(txtStock.Text);
-                                            product.ProductCategoryID = Int32.Parse(cmbCategory.SelectedValue.ToString());
-                                            product.ProductBrandID = Int32.Parse(cmbBrand.SelectedValue.ToString());
-                                            productImpl.Insert(product);
-                                            Select();
+                                                double price = double.Parse(txtPrice.Text);
+                                                productImpl productImpl = new productImpl();
+                                                product product = new product();
+                                                product.Name = newName;
+                                                product.Price = Double.Parse(txtPrice.Text);
+                                                product.Stock = Int32.Parse(txtStock.Text);
+                                                product.ProductCategoryID = Int32.Parse(cmbCategory.SelectedValue.ToString());
+                                                product.ProductBrandID = Int32.Parse(cmbBrand.SelectedValue.ToString());
+                                                productImpl.Insert(product);
+                                                Select();
 
 
+
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                MessageBox.Show("El stock debe ser un numero entero");
+                                            }
                                         }
-                                        catch (Exception ex)
-                                        {
-                                            MessageBox.Show("El stock debe ser un numero entero");
-                                        }
+                                        else MessageBox.Show("Debe seleccionar una categoria y una marca");
+
                                     }
-                                    else MessageBox.Show("Debe seleccionar una categoria y una marca");
+                                    else MessageBox.Show("El Stock debe contener solo numeros");
 
                                 }
-                                else MessageBox.Show("El Stock debe contener solo numeros");
-
+                                else MessageBox.Show("El precio debe contener solo numeros");
                             }
-                            else MessageBox.Show("El precio debe tener un valor positivo");
+                            else MessageBox.Show("El nombre debe contener al menos una letra");
 
                         }
-                        else MessageBox.Show("El precio debe contener solo numeros");
-
+                        else MessageBox.Show("El nombre no puede contener caracteres especiales");
+                        
                     }
                     else MessageBox.Show("El Stock no puede estar vacio");
 
@@ -205,70 +202,76 @@ namespace mechanicWPF.Pages
 
             }
             else MessageBox.Show("El Nombre no puede estar vacio");
+
         }
 
         void Update()
         {
-            DataRowView view = (DataRowView)dtgProducts.SelectedItem;
+           DataRowView view = (DataRowView)dtgProducts.SelectedItem;
 
-            if (txtName.Text != "")
-            {
-                if (txtPrice.Text != "")
+           if (view != null)
+           {
+                if (txtName.Text != "")
                 {
-                    if (txtStock.Text != "")
+                    if (txtPrice.Text != "")
                     {
-                        if (validations.ContainsSpecialCharacters(txtName.Text) == false)
+                        if (txtStock.Text != "")
                         {
-                            if(catId != 0 || brandId != 0)
+                            if (validations.IsOnlyLettersNumbers(txtName.Text) == true)
                             {
-                                if (validations.IsOnlyDecimalNumbers(txtPrice.Text) && double.Parse(txtPrice.Text) > 0)
+                                if (validations.ContainsAtLeastOneLetter(txtName.Text) == true)
                                 {
-                                    if (validations.IsOnlyPositiveNumbers(txtPrice.Text))
+                                    if (validations.isOnlyPositiveNumbers(txtPrice.Text) && double.Parse(txtPrice.Text) > 0)
                                     {
-                                        if (validations.isOnlyNumber(txtStock.Text))
+                                        if (validations.isOnlyNumbers(txtStock.Text))
                                         {
-                                            
-                                            try
-                                            {
-                                                string updateName = validations.EraseSpaces(txtName.Text);
-
-                                                productImpl productImpl = new productImpl();
-                                                int id = int.Parse(view.Row[0].ToString());
-                                                product product = new product(id, updateName, double.Parse(txtPrice.Text), int.Parse(cmbBrand.SelectedValue.ToString()), int.Parse(cmbCategory.SelectedValue.ToString()), int.Parse(txtStock.Text));
-
-                                                productImpl.Update(product);
-                                                MessageBox.Show("Producto actualizado con exito " + DateTime.Now);
-                                                Select();
-                                            }
-                                            catch (Exception)
+                                            if (catId != 0 && brandId != 0)
                                             {
 
-                                                MessageBox.Show("El stock debe ser un numero entero");
+                                                try
+                                                {
+                                                    string updateName = validations.EraseSpaces(txtName.Text);
+
+                                                    productImpl productImpl = new productImpl();
+                                                    int id = int.Parse(view.Row[0].ToString());
+                                                    product product = new product(id, updateName, double.Parse(txtPrice.Text), int.Parse(cmbBrand.SelectedValue.ToString()), int.Parse(cmbCategory.SelectedValue.ToString()), int.Parse(txtStock.Text));
+
+                                                    productImpl.Update(product);
+                                                    MessageBox.Show("Producto actualizado con exito " + DateTime.Now);
+                                                    Select();
+                                                }
+                                                catch (Exception)
+                                                {
+
+                                                    MessageBox.Show("El stock debe ser un numero entero");
+                                                }
+
                                             }
+                                            else MessageBox.Show("Debe seleccionar una categoria y una marca");
+
                                         }
                                         else MessageBox.Show("El Stock debe contener solo numeros");
-                                    }
-                                    else MessageBox.Show("El precio debe tener un valor positivo");
 
+                                    }
+                                    else MessageBox.Show("El precio debe contener solo numeros y ser mayor a 0");
                                 }
-                                else MessageBox.Show("El precio debe estar en numeros");
+                                else MessageBox.Show("El nombre debe contener al menos una letra");
+
                             }
-                            else  MessageBox.Show("La categoria o la marca no puede estar vacia");
+                            else MessageBox.Show("El nombre no puede contener caracteres especiales");
 
                         }
-                        else MessageBox.Show("El nombre no puede contener caracteres especiales");
+                        else MessageBox.Show("El Stock no puede estar vacio");
 
                     }
-                    else MessageBox.Show("El Stock no puede estar vacio");
+                    else MessageBox.Show("El Precio no puede estar vacio");
 
                 }
-                else MessageBox.Show("El Precio no puede estar vacio");
+                else MessageBox.Show("El Nombre no puede estar vacio");
 
-            }
-            else MessageBox.Show("El Nombre no puede estar vacio");
+           }
 
 
-            
 
         }
 

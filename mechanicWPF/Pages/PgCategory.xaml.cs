@@ -72,26 +72,31 @@ namespace mechanicWPF.Pages
                 }
                 else
                 {
-                    if (validations.ContainsSpecialCharacters(txtCategory.Text)==false)
+                    if (validations.IsOnlyLettersNumbers(txtCategory.Text)==false)
                     {
-                        try
+                        if (validations.ContainsAtLeastOneLetter(txtCategory.Text) == true)
                         {
+                            try
+                            {
 
-                            int id = int.Parse(view.Row.ItemArray[0].ToString());
-                            productCategory productCategory = new productCategory(validations.EraseSpaces(txtCategory.Text), id);
-                            productCategoryImpl productCategoryImpl = new productCategoryImpl();
+                                int id = int.Parse(view.Row.ItemArray[0].ToString());
+                                productCategory productCategory = new productCategory(validations.EraseSpaces(txtCategory.Text), id);
+                                productCategoryImpl productCategoryImpl = new productCategoryImpl();
 
-                            productCategoryImpl.Update(productCategory);
-                            MessageBox.Show("Resgistro modificado con exito - " + DateTime.Now);
+                                productCategoryImpl.Update(productCategory);
+                                MessageBox.Show("Resgistro modificado con exito - " + DateTime.Now);
 
 
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now + "\n" + ex.Message);
+
+
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now + "\n" + ex.Message);
+                        else MessageBox.Show("La categoria debe contener al menos una letra");
 
-
-                        }
                     } else MessageBox.Show("No se puede insertar caracteres especiales en el nombre de la categoria");
                    
                 }
@@ -144,30 +149,34 @@ namespace mechanicWPF.Pages
             }
             else
             {
-                if (validations.ContainsSpecialCharacters(txtCategory.Text)==false)
+                if (validations.IsOnlyLettersNumbers(txtCategory.Text)==false)
                 {
-                    productCategory category = new productCategory(validations.EraseSpaces(txtCategory.Text));
-                    productCategoryImpl implCategory = new productCategoryImpl();
-                    try
+                    if (validations.ContainsAtLeastOneLetter(txtCategory.Text) == true)
                     {
-                        int n = implCategory.Insert(category);
-                        if (n > 0)
+                        productCategory category = new productCategory(validations.EraseSpaces(txtCategory.Text));
+                        productCategoryImpl implCategory = new productCategoryImpl();
+                        try
                         {
-                            MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
-                            Select();
+                            int n = implCategory.Insert(category);
+                            if (n > 0)
+                            {
+                                MessageBox.Show("Resgistro insertado con exito - " + DateTime.Now);
+                                Select();
+                            }
+                            else
+                            {
+                                MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now);
+
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("No se pudo insertar el registro - " + DateTime.Now);
-
+                            MessageBox.Show(ex.Message);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
 
-                    txtCategory.Clear();
+                        txtCategory.Clear();
+                    }else MessageBox.Show("La categoria debe tener almenos una letra");
+
                 }else MessageBox.Show("No se puede insertar caracteres especiales en el nombre de la categoria");
 
             }
