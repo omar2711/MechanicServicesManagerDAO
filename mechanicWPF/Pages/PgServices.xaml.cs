@@ -76,6 +76,7 @@ namespace mechanicWPF.Pages
                 dgvServices.ItemsSource = null;
                 dgvServices.ItemsSource = productCategoryImpl.Select().DefaultView;
                 dgvServices.Columns[0].Visibility = Visibility.Collapsed;
+                dgvServices.Columns[6].Visibility = Visibility.Collapsed;
 
             }
             catch (Exception ex)
@@ -105,9 +106,9 @@ namespace mechanicWPF.Pages
 
                     if (validations.isOnlyPositiveNumbers(txtServicePrice.Text) == true)
                     {
-                        if (validations.isOnlyPositiveNumbers(txtServicePrice.Text)==true)
+                        if (validations.isOnlyPositiveNumbers(txtServicePrice.Text)==true && double.Parse(txtServicePrice.Text)>0)
                         {
-                            if (validations.IsOnlyLettersNumbers(txtServiceName.Text) == true)
+                            if (validations.IsOnlyLettersNumbers(txtServiceName.Text) == false)
                             {
                                 if (validations.ContainsAtLeastOneLetter(txtServiceName.Text) == true)
                                 {
@@ -143,10 +144,10 @@ namespace mechanicWPF.Pages
                             else MessageBox.Show("El nombre del servicio solo puede contener letras y numeros");
 
                         }
-                        else MessageBox.Show("El precio debe ser un numero positivo");
+                        else MessageBox.Show("El precio debe ser un numero positivo y mayor a 0");
 
                     }
-                    else MessageBox.Show("El precio debe ser un numero positivo");
+                    else MessageBox.Show("El precio debe ser un numero positivo y mayor a 0");
 
 
                 }
@@ -202,9 +203,9 @@ namespace mechanicWPF.Pages
 
                 if (validations.isOnlyPositiveNumbers(txtServicePrice.Text) == true)
                 {
-                    if (validations.isOnlyPositiveNumbers(txtServicePrice.Text)==true)
+                    if (validations.isOnlyPositiveNumbers(txtServicePrice.Text)==true && double.Parse(txtServicePrice.Text) > 0)
                     {
-                        if (validations.IsOnlyLettersNumbers(txtServiceName.Text) == true)
+                        if (validations.IsOnlyLettersNumbers(txtServiceName.Text) == false)
                         {
                             if (validations.ContainsAtLeastOneLetter(txtServiceName.Text) == true)
                             {
@@ -237,10 +238,10 @@ namespace mechanicWPF.Pages
                         else MessageBox.Show("El nombre del servicio solo puede contener letras y numeros");
                        
                     }
-                    else MessageBox.Show("El precio debe ser un numero positivo");
+                    else MessageBox.Show("El precio debe ser un numero positivo y mayor a 0");
                     
                 }
-                else MessageBox.Show("El precio debe ser un numero positivo");
+                else MessageBox.Show("El precio debe ser un numero positivo y mayor a 0");
 
 
             }

@@ -50,6 +50,7 @@ namespace mechanicWPF.Pages
                 dgvCategories.ItemsSource = null;
                 dgvCategories.ItemsSource = productCategoryImpl.Select().DefaultView;
                 dgvCategories.Columns[0].Visibility = Visibility.Collapsed;
+                dgvCategories.Columns[4].Visibility = Visibility.Collapsed;
 
             }
             catch (Exception ex)

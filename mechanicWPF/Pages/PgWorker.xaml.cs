@@ -140,7 +140,7 @@ namespace mechanicWPF.Pages
                                             }
 
                                         }
-                                        else MessageBox.Show("Debe tener");
+                                        else MessageBox.Show("El correo debe tener un formato valido: "+"\n" + "ejemplo@ejemplo.com");
 
                                     }
                                     else MessageBox.Show("Debe seleccionar un rol");
@@ -221,7 +221,7 @@ namespace mechanicWPF.Pages
                                                 }
 
                                             }
-                                            else MessageBox.Show("Debe tener");
+                                            else MessageBox.Show("El correo debe tener un formato valido: " + "\n" + "ejemplo@ejemplo.com");
 
                                         }
                                         else MessageBox.Show("Debe seleccionar un rol");
@@ -229,7 +229,7 @@ namespace mechanicWPF.Pages
                                     else MessageBox.Show("El ID de sucursal solo puede ser numeros positivos");
 
                                 }
-                                else MessageBox.Show("El segundo apellido solo puede contener letras o en caso de no tener debe estar en blanco");
+                                else MessageBox.Show("El segundo apellido solo puede contener letras o en caso de no tener, debe estar en blanco");
                             }
                             else MessageBox.Show("El apellido solo puede contener letras");
                         }
@@ -309,6 +309,7 @@ namespace mechanicWPF.Pages
                 dgtUsers.ItemsSource = null;
                 dgtUsers.ItemsSource = workerImpl.Select().DefaultView;
                 dgtUsers.Columns[0].Visibility = Visibility.Collapsed;
+                dgtUsers.Columns[12].Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {

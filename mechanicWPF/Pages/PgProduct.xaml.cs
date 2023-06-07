@@ -148,13 +148,13 @@ namespace mechanicWPF.Pages
                 {
                     if (txtStock.Text != "")
                     {
-                        if (validations.IsOnlyLettersNumbers(txtName.Text) == true)
+                        if (validations.IsOnlyLettersNumbers(txtName.Text) == false)
                         {
                             if (validations.ContainsAtLeastOneLetter(txtName.Text) == true)
                             {
                                 if (validations.isOnlyPositiveNumbers(txtPrice.Text) && double.Parse(txtPrice.Text) > 0)
                                 {
-                                    if (validations.isOnlyNumbers(txtStock.Text))
+                                    if (validations.isOnlyNumbers(txtStock.Text) && int.Parse(txtStock.Text)>0)
                                     {
                                         if (catId != 0 && brandId != 0)
                                         {
@@ -184,10 +184,10 @@ namespace mechanicWPF.Pages
                                         else MessageBox.Show("Debe seleccionar una categoria y una marca");
 
                                     }
-                                    else MessageBox.Show("El Stock debe contener solo numeros");
+                                    else MessageBox.Show("El Stock debe contener solo numeros y ser mayor a 0");
 
                                 }
-                                else MessageBox.Show("El precio debe contener solo numeros");
+                                else MessageBox.Show("El precio debe contener solo numeros y ser mayor a 0");
                             }
                             else MessageBox.Show("El nombre debe contener al menos una letra");
 
@@ -217,7 +217,7 @@ namespace mechanicWPF.Pages
                     {
                         if (txtStock.Text != "")
                         {
-                            if (validations.IsOnlyLettersNumbers(txtName.Text) == true)
+                            if (validations.IsOnlyLettersNumbers(txtName.Text) == false)
                             {
                                 if (validations.ContainsAtLeastOneLetter(txtName.Text) == true)
                                 {
@@ -250,7 +250,7 @@ namespace mechanicWPF.Pages
                                             else MessageBox.Show("Debe seleccionar una categoria y una marca");
 
                                         }
-                                        else MessageBox.Show("El Stock debe contener solo numeros");
+                                        else MessageBox.Show("El Stock debe contener solo numeros y ser mayor a 0");
 
                                     }
                                     else MessageBox.Show("El precio debe contener solo numeros y ser mayor a 0");
