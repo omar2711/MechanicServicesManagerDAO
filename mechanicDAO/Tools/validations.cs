@@ -12,23 +12,28 @@ namespace mechanicDAO.Validations
     {
         public static bool IsOnlyLettersNumbers(string text)
         {
-            bool containsSpecialChars = Regex.IsMatch(text, @"^[a-zA-Z0-9\s]+$");
-
-            if (containsSpecialChars)
+            foreach (char caracter in text)
             {
-                return false;
+                if (!char.IsLetter(caracter) && !char.IsDigit(caracter) && !char.IsWhiteSpace(caracter))
+                {
+                    return false;
+                }
             }
-            else return true;
+            return true;
+
         }
 
         public static bool IsOnlyLetters(string text)
         {
-            bool containsNonLetters = Regex.IsMatch(text, @"[^a-zA-Z\s]");
-            if (containsNonLetters)
+            foreach (char c in text)
             {
-                return false;
+                if (!char.IsLetter(c) && !char.IsWhiteSpace(c))
+                {
+                    return false;
+                }
+                
             }
-            else return true;
+            return true;
 
         }
 

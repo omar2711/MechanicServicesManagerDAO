@@ -4,11 +4,116 @@
 
 <html>
 <head runat="server">
-    <title></title>
+    <title> <%:Page.Title%> - Mecanica Isaacar</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body
+        {
+          background-image: url("./Assets/R.jpeg");
+          background-repeat: no-repeat;
+          background-size: cover; 
+        }
+
+       .navbar {
+          top: 20px; /* Adjust the distance from the top as needed */
+          left: 50%; /* Position the navbar horizontally at the center */
+          transform: translateX(-55.5%); /* Center the navbar horizontally */
+          background-color: #f1f1f1;
+          border-radius: 20px;
+          padding: 10px 20px;
+          margin: auto;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          width: 90%; /* Adjust the width as needed */
+                    border : 2px solid white;
+
+       }
+       
+       .mainContainer{
+           margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          
+      border-radius:10px;
+          background-color: white; /* Black with transparency */
+          margin: 60px 100px 50px; /* Top, Right, Bottom margins */
+          padding: 20px; /* Optional padding inside the container */
+    
+
+       }
+       .mainContainerDefault{
+           margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      border-radius:10px;
+ background-color: rgba(0, 0, 0, 0.5);  
+ margin: 80px 100px 50px; /* Top, Right, Bottom margins */
+          padding: 20px; /* Optional padding inside the container */
+    
+
+       }
+
+      
+
+       .formContainer{
+              margin: 0;
+             padding: 0;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+       }
+
+       .innerContainer {
+          margin: 0 20px; /* 20px margin on the left and right */
+          width: 70%; /* Take up the full width available */
+          background-color: rgba(255, 255, 255, 0.8); /* Example inner container background color */
+          padding: 20px; /* Optional padding inside the inner container */
+        }
+
+       .liClass {
+      color: white;
+      transition: color 0.3s ease;
+    }
+
+    .liClass:hover {
+      color: yellow; /* Example hover color */
+      cursor: pointer;
+    }
+
+    </style>
+
+    
+    
+
 </head>
 <body>
+    <div>
+        <nav class="navbar" style="background-color: darkorange">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <img src="./Assets/logo.png" width="35px"/>
+                    <a class="navbar-brand" href="Default.aspx">Mecanica Isaacar</a>
+                </div>
+                <ul class="nav navbar-nav liClass">
+                    <li class="liClass"><a href="Categories.aspx" class="text-light">Categorias</a></li>
+                    <li class="liClass"><a href="Products.aspx" class="text-light">Productos</a></li>
+
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="liClass"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li class="liClass"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+         </nav>
+    </div>
     <form id="form1" runat="server">
         <div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
