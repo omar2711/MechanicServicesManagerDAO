@@ -16,8 +16,8 @@ namespace mechanicDAO.Model
         public int ProfilePic { get; set; }
         public string Mail { get; set; }
 
-        public worker(int roleID, int branchID, int personID, string userName, string password, int profilePic ,int iD, string name, string secondName, string lastName, string secondLastName, string cI, byte status, DateTime creationDate, DateTime modificationDate, int userID, string mail) 
-            : base(iD, name, secondName, lastName, secondLastName, cI, status, creationDate, modificationDate, userID)
+        public worker(int roleID, int branchID, int personID, string userName, string password, int profilePic ,int iD, string name,  string lastName, string secondLastName, string cI, byte status, DateTime creationDate, DateTime modificationDate, int userID, string mail) 
+            : base(iD, name, lastName, secondLastName, cI, status, creationDate, modificationDate, userID)
         {
             RoleID = roleID;
             BranchID = branchID;
@@ -29,8 +29,8 @@ namespace mechanicDAO.Model
         }
 
 
-        public worker(int iD, string name, string secondName, string lastName, string secondLastName, string cI, int roleID, int branchID, DateTime modificationDate, int userID, string mail)
-            : base(iD, name, secondName, lastName, secondLastName, cI, modificationDate, userID)
+        public worker(int iD, string name, string lastName, string secondLastName, string cI, int roleID, int branchID, DateTime modificationDate, int userID, string mail)
+            : base(iD, name,  lastName, secondLastName, cI, modificationDate, userID)
         {
             RoleID = roleID;
             BranchID = branchID;
@@ -43,8 +43,8 @@ namespace mechanicDAO.Model
         
 
 
-        public worker(int roleID, int branchID, int personID, string userName, string password, int profilePic ,string name, string secondName, string lastName, string secondLastName, string cI, string mail) 
-            : base(name, secondName, lastName, secondLastName, cI)
+        public worker(int roleID, int branchID, int personID, string userName, string password, int profilePic ,string name, string lastName, string secondLastName, string cI, string mail) 
+            : base(name, lastName, secondLastName, cI)
         {
             RoleID = roleID;
             BranchID = branchID;
@@ -55,8 +55,8 @@ namespace mechanicDAO.Model
             Mail = mail;
         }
 
-        public worker(int roleID, int branchID, int personID, string userName, string password, int profilePic ,string name, string secondName, string lastName, string secondLastName, string cI, int iD, string mail) 
-            : base(name, secondName, lastName, secondLastName, cI, iD)
+        public worker(int roleID, int branchID, int personID, string userName, string password, int profilePic ,string name,  string lastName, string secondLastName, string cI, int iD, string mail) 
+            : base(name,  lastName, secondLastName, cI, iD)
         {
             RoleID = roleID;
             BranchID = branchID;
@@ -98,12 +98,11 @@ namespace mechanicDAO.Model
         
 
 
-        public worker(int iD, string name, string secondName, string lastName, string secondLastName, string cI, byte status, DateTime modificationDate, int userID, string mail) 
-            : base(iD, name, secondName, lastName, secondLastName, cI, status,modificationDate, userID)
+        public worker(int iD, string name, string lastName, string secondLastName, string cI, byte status, DateTime modificationDate, int userID, string mail) 
+            : base(iD, name,  lastName, secondLastName, cI, status,modificationDate, userID)
         {
             ID = iD;
             Name = name;
-            SecondName = secondName;
             LastName = lastName;
             SecondLastName = secondLastName;
             CI = cI;

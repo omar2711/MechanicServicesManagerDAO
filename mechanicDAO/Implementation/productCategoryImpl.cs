@@ -59,7 +59,7 @@ namespace mechanicDAO.Implementation
 
         public System.Data.DataTable Select()
         {
-            string query = @"SELECT id, name AS Categoria FROM productCategory WHERE status = 1";
+            string query = @"SELECT id, name AS Categoría FROM productCategory WHERE status = 1 ORDER BY 2";
             SqlCommand command = CreateBasicCommand(query);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;

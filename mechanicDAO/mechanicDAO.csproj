@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\BaseImpl.cs" />
+    <Compile Include="Implementation\branchImpl.cs" />
+    <Compile Include="Implementation\ClientImpl.cs" />
     <Compile Include="Implementation\productBrandImpl.cs" />
     <Compile Include="Implementation\productCategoryImpl.cs" />
     <Compile Include="Implementation\productImpl.cs" />
@@ -49,6 +51,8 @@
     <Compile Include="Implementation\serviceImpl.cs" />
     <Compile Include="Implementation\workerImpl.cs" />
     <Compile Include="Interfaces\IBase.cs" />
+    <Compile Include="Interfaces\IBranch.cs" />
+    <Compile Include="Interfaces\IClient.cs" />
     <Compile Include="Interfaces\IProduct.cs" />
     <Compile Include="Interfaces\IProductBrand.cs" />
     <Compile Include="Interfaces\IproductCategory.cs" />
@@ -56,6 +60,8 @@
     <Compile Include="Interfaces\IService.cs" />
     <Compile Include="Interfaces\IWorker.cs" />
     <Compile Include="Model\BaseTable.cs" />
+    <Compile Include="Model\branch.cs" />
+    <Compile Include="Model\client.cs" />
     <Compile Include="Model\person.cs" />
     <Compile Include="Model\product.cs" />
     <Compile Include="Model\productBrand.cs" />

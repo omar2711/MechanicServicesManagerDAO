@@ -56,7 +56,7 @@
                 <br />
 
                 <div class="form-group">
-                    <asp:GridView runat="server" ID="productsDTG" CssClass="table table-striped table-bordered table-hover">
+                    <asp:GridView runat="server" ID="productsDTG" OnRowDataBound="productsDTG_RowDataBound" CssClass="table table-striped table-bordered table-hover">
                         <HeaderStyle BackColor="orange" ForeColor="White" />
 
                         <Columns>

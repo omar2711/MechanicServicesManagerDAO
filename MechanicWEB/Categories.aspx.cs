@@ -108,5 +108,10 @@ namespace MechanicWEB
                 throw ex;
             }
         }
+
+        protected void categoriesDTG_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            e.Row.Cells[1].Visible = false;
+        }
     }
 }

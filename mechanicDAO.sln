@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mechanicWPF", "mechanicWPF\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MechanicWEB", "MechanicWEB\MechanicWEB.csproj", "{56A1523E-3682-4A32-A56B-270FEC2D3352}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MechanicWEBF", "MechanicWEBF\MechanicWEBF.csproj", "{F3E1F289-00D6-4BCE-B7CE-BC5C794E40FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{56A1523E-3682-4A32-A56B-270FEC2D3352}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56A1523E-3682-4A32-A56B-270FEC2D3352}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56A1523E-3682-4A32-A56B-270FEC2D3352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3E1F289-00D6-4BCE-B7CE-BC5C794E40FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E1F289-00D6-4BCE-B7CE-BC5C794E40FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E1F289-00D6-4BCE-B7CE-BC5C794E40FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E1F289-00D6-4BCE-B7CE-BC5C794E40FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

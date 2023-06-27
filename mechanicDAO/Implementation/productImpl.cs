@@ -62,7 +62,7 @@ namespace mechanicDAO.Implementation
 
         public DataTable Select()
         {
-            string query = @"SELECT p.id, p.name AS Producto, p.price AS Precio, p.stock AS Stock, pc.name AS Categoria, pb.name AS Marca FROM product p INNER JOIN productCategory pc ON p.categoryId = pc.id INNER JOIN productBrand pb ON p.productBrandId = pb.id WHERE p.status = 1";
+            string query = @"SELECT p.id, p.name AS Producto, p.price AS Precio, p.stock AS Stock, pc.name AS Categoria, pb.name AS Marca FROM product p INNER JOIN productCategory pc ON p.categoryId = pc.id INNER JOIN productBrand pb ON p.productBrandId = pb.id WHERE p.status = 1 ORDER BY 2";
             SqlCommand command = CreateBasicCommand(query);
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.SelectCommand = command;

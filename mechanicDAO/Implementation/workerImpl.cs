@@ -67,7 +67,6 @@ namespace mechanicDAO.Implementation
             int id = int.Parse(GetGenerateIDTable("person"));
 
             commands[0].Parameters.AddWithValue("@name", t.Name);
-            commands[0].Parameters.AddWithValue("@secondName", t.SecondName);
             commands[0].Parameters.AddWithValue("@lastName", t.LastName);
             commands[0].Parameters.AddWithValue("@secondLastName", t.SecondLastName);
             commands[0].Parameters.AddWithValue("@ci", t.CI);
@@ -76,7 +75,7 @@ namespace mechanicDAO.Implementation
             commands[1].Parameters.AddWithValue("@roleId", t.RoleID);
             commands[1].Parameters.AddWithValue("@branchId", t.BranchID);
             commands[1].Parameters.AddWithValue("@userName", t.UserName);
-            commands[1].Parameters.AddWithValue("@profilePic", "1");
+            commands[1].Parameters.AddWithValue("@profilePic", "1"); 
             commands[1].Parameters.AddWithValue("@personId", id);
             commands[1].Parameters.AddWithValue("@mail", t.Mail);
 
@@ -145,7 +144,6 @@ namespace mechanicDAO.Implementation
             commands[1].CommandText = query2;
 
             commands[0].Parameters.AddWithValue("@name", t.Name);
-            commands[0].Parameters.AddWithValue("@secondName", t.SecondName);
             commands[0].Parameters.AddWithValue("@lastName", t.LastName);
             commands[0].Parameters.AddWithValue("@secondLastName", t.SecondLastName);
             commands[0].Parameters.AddWithValue("@ci", t.CI);
@@ -395,7 +393,6 @@ namespace mechanicDAO.Implementation
             commands[1].CommandText = query2;
 
             commands[0].Parameters.AddWithValue("@name", p.Name);
-            commands[0].Parameters.AddWithValue("@secondName", p.SecondName);
             commands[0].Parameters.AddWithValue("@lastName", p.LastName);
             commands[0].Parameters.AddWithValue("@secondLastName", p.SecondLastName);
             commands[0].Parameters.AddWithValue("@ci", p.CI);

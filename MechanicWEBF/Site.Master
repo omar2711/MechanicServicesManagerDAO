@@ -1,0 +1,251 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="MechanicWEBF.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+    <style>
+        .mainContainer{
+           margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          
+      border-radius:10px;
+          background-color: white; /* Black with transparency */
+          margin: 60px 100px 50px; /* Top, Right, Bottom margins */
+          padding: 20px; /* Optional padding inside the container */
+    
+
+       }
+       .mainContainerDefault{
+           margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      border-radius:10px;
+ background-color: rgba(0, 0, 0, 0.5);  
+ margin: 80px 100px 50px; /* Top, Right, Bottom margins */
+          padding: 20px; /* Optional padding inside the container */
+    
+
+       }
+
+       .dark-transparent {
+      background-color: rgba(0, 0, 0, 0.5); /* Cambia el valor "0.5" para ajustar la transparencia */
+      color: #fff; /* Cambia el color del texto si lo deseas */
+      margin-top:120px;
+      margin-bottom:120px;
+      border-radius: 10px;
+
+    }
+       .miniContainer{
+           padding: 50px;
+       }
+
+       .ccontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin-bottom: 70px;
+}
+
+.card {
+  width: 400px;
+  height: 700px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s;
+  margin-left:2%;
+  margin-right:2%;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.card-img {
+  width: 400px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #888;
+}
+
+
+       body
+       {
+          background-image: url("./Assets/R.jpeg");
+          background-repeat: no-repeat;
+          background-size: cover; 
+        }
+
+
+      
+
+       .formContainer{
+              margin: 0;
+             padding: 0;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+       }
+
+       .innerContainer {
+          margin: 0 20px; /* 20px margin on the left and right */
+          width: 70%; /* Take up the full width available */
+          background-color: rgba(255, 255, 255, 0.8); /* Example inner container background color */
+          padding: 20px; /* Optional padding inside the inner container */
+        }
+
+    </style>
+  <title>Inicio</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+ 
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol?callback=loadMap" async defer></script>
+
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+     <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="Default.aspx"><span>Mecánica Isaacar</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link active" href="Default.aspx">Home</a></li>
+         
+            <%if (Session["id"] != null)
+            {%>
+                <%if (Session["role"].ToString() == "Cliente")
+                {%>
+                    <li><a class="nav-link" href="Products.aspx">Productos</a></li>
+                    <li><a class="nav-link" href="#">Servicios</a></li>
+                    <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Profile.aspx">Ver Perfil</a></li>
+                            <li><a href="Passchange.aspx">Modificar Perfil</a></li>
+                            <li><a href="#">Drop Down 3</a></li>
+                            <li><a href="#">Drop Down 4</a></li>
+                        </ul>
+                    </li>
+
+                <%} %>
+
+                <%if (Session["role"].ToString() == "Empleado")
+                    {%>
+                    <li><a class="nav-link" href="Products.aspx">Productos</a></li>
+                    <li><a class="nav-link" href="#">Servicios</a></li>
+                    <li><a class="nav-link" href="Categories.aspx">Categorías</a></li>
+                    <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Profile.aspx">Ver Perfil</a></li>
+                            <li><a href="Passchange.aspx">Modificar Perfil</a></li>
+                            <li><a href="#">Drop Down 3</a></li>
+                            <li><a href="#">Drop Down 4</a></li>
+                        </ul>
+                    </li>
+                 <%} %>
+
+
+                <%if (Session["role"].ToString() == "Admin")
+                {%>
+                    <li><a class="nav-link" href="Categories.aspx">Categorías</a></li>
+            <li><a class="nav-link" href="Products.aspx">Productos</a></li>
+                    <li><a class="nav-link" href="#">Servicios</a></li>
+                    <li class="dropdown"><a href="#"><span>Perfil</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Profile.aspx">Ver Perfil</a></li>
+                            <li><a href="Passchange.aspx">Modificar Perfil</a></li>
+                            <li><a href="#">Drop Down 3</a></li>
+                            <li><a href="#">Drop Down 4</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="#"><span>Administrador</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="Client.aspx">Clientes</a></li>
+                            <li><a href="BranchView.aspx">Sucursales</a></li>
+                            <li><a href="#">Drop Down 3</a></li>
+                            <li><a href="#">Drop Down 4</a></li>
+                        </ul>
+                    </li>
+                <%} %>
+
+
+                
+
+
+                <li><a class="getstarted" href="Logout.aspx">Logout</a></li>
+
+            <%} 
+              else
+              {%>
+                        <li><a class="getstarted" href="Login.aspx">Inícia Sesion</a></li>
+
+
+            <%}%>
+           
+
+          
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
