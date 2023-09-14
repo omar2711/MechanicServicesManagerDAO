@@ -19,7 +19,7 @@
 
 function loadMap() {
     var map = new Microsoft.Maps.Map('#mapContainer', {
-        credentials: 'AlNapWkF5mpkg9NSaNE4vM0BmjQeG8JsxPVtnUIY_OKwceBDLDoilIFhc7AZoZwJ'
+        credentials: 'your bing maps api key'
     });
 
     var marker = new Microsoft.Maps.Pushpin(map.getCenter(), {
